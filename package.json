@@ -18,7 +18,8 @@
     "@unhead/vue": "^2.0.14",
     "nuxt": "^3.18.1",
     "vue": "^3.5.20",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "vite-plugin-vuetify": "^2.1.2",

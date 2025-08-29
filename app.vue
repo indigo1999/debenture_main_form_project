@@ -25,6 +25,11 @@
               </div>
               <div class="bg-info rounded-lg pa-3 mt-2">
                 <div>
+                  {{ this.$store.state.count }}
+                </div>
+              </div>
+              <div class="bg-info rounded-lg pa-3 mt-2">
+                <div>
                   <ButtonSubmit/>
                 </div>
               </div>
@@ -73,7 +78,22 @@ import MainForm1 from "./components/MainForm1.vue"
 import MainForm2 from "./components/MainForm2.vue"
 import ButtonSubmit from "./components/ButtonSubmit.vue"
 
-
+export default {
+  mounted() {
+    console.log(this.$store.state.count)
+    const {data : count} = this.$store.state.count
+  },
+  // methods : {
+  //   increment() {
+  //     this.$store.commit('increment')
+  //     console.log(console.log(this.$store.state.count))
+  //   },
+  //   decrement() {
+  //     this.$store.commit('decrement')
+  //     console.log(console.log(this.$store.state.count))
+  //   }
+  // }
+}
 
 </script>
 
