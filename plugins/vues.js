@@ -3,7 +3,12 @@ import { createStore } from "vuex"
 const store = createStore({
     state() {
         return {
-            count : 0
+            count : 0,
+            name : "",
+            phone_number : "",
+            email : "",
+            select : null,
+            option : false
         }
     },
     mutations : {
