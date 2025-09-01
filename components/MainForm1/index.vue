@@ -21,6 +21,11 @@
             </div>
             <div>
                 <div class="bg-red rounded-lg pa-3 mt-2">
+                    <DebentureCode/>
+                </div>
+            </div>
+            <div>
+                <div class="bg-red rounded-lg pa-3 mt-2">
                     <v-row>
                         <v-col>
                             <StartDate/>
@@ -94,5 +99,6 @@ import Total_Invest_Mom from "./Total_Invest_Mom.vue"
 import Total_Invest_Goi from "./Total_Invest_Goi.vue"
 import Agency from "./Agency.vue"
 import Registrar from "./Registrar.vue"
+import DebentureCode from "./DebentureCode.vue"
 
 </script>
