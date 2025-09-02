@@ -14,7 +14,8 @@ const store = createStore({
             debenture_code : "",
             start_date : "",
             end_date : "",
-            interest_freq : ""
+            interest_freq : "",
+            interest_percent : ""
         }
     },
     mutations : {
@@ -57,6 +58,10 @@ const store = createStore({
             state.interest_freq = interest_freq
             console.log("interest freq : " + state.interest_freq)
         },
+        set_interest_percent(state, interest_percent){
+            state.interest_percent = interest_percent
+            console.log("interest percent : " + state.interest_percent)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -90,6 +95,9 @@ const store = createStore({
         },
         set_interest_freq({ commit }, interest_freq) {
             commit("set_interest_freq", interest_freq)
+        },
+        set_interest_percent({ commit }, interest_percent){
+            commit("set_interest_percent",interest_percent)
         }
 
     },
