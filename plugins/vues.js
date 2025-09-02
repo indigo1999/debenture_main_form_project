@@ -15,7 +15,8 @@ const store = createStore({
             start_date : "",
             end_date : "",
             interest_freq : "",
-            interest_percent : ""
+            interest_percent : "",
+            detail_note : ""
         }
     },
     mutations : {
@@ -62,6 +63,10 @@ const store = createStore({
             state.interest_percent = interest_percent
             console.log("interest percent : " + state.interest_percent)
         },
+        set_detail_note(state, detail_note){
+            state.detail_note = detail_note
+            console.log("detail note : "+state.detail_note)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -98,6 +103,9 @@ const store = createStore({
         },
         set_interest_percent({ commit }, interest_percent){
             commit("set_interest_percent",interest_percent)
+        },
+        set_detail_note({ commit }, detail_note) {
+            commit("set_detail_note",detail_note)
         }
 
     },
