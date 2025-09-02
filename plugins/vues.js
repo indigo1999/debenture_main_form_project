@@ -12,6 +12,8 @@ const store = createStore({
                 day : ""
             },
             debenture_code : "",
+            start_date : "",
+            end_date : ""
         }
     },
     mutations : {
@@ -42,6 +44,14 @@ const store = createStore({
             state.debenture_code = debenture_code
             console.log("debenture code : "+state.debenture_code)
         },
+        set_start_date(state,start_date){
+            state.start_date = start_date
+            console.log("start date : "+state.start_date)
+        },
+        set_end_date(state,end_date){
+            state.end_date = end_date
+            console.log("end date : "+state.end_date)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -66,6 +76,12 @@ const store = createStore({
         },
         set_debenture_code({ commit }, debenture_code) {
             commit("set_debenture_code",debenture_code)
+        },
+        set_start_date({ commit }, start_date){
+            commit("set_start_date",start_date)
+        },
+        set_end_date({ commit }, end_date) {
+            commit("set_end_date",end_date)
         }
 
     },
