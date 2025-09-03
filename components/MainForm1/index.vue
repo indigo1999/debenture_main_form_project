@@ -54,19 +54,7 @@
             </div>
             <div>
                 <div class="bg-red rounded-lg pa-3 mt-2">
-                    <TotalInvest/>
-                </div>
-            </div>
-            <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
-                    <v-row>
-                        <v-col>
-                            <Total_Invest_Mom/>
-                        </v-col>
-                        <v-col>
-                            <Total_Invest_Goi/>
-                        </v-col>
-                    </v-row>
+                    <Total_Investment_form/>
                 </div>
             </div>
             <div>
@@ -77,6 +65,11 @@
             <div>
                 <div class="bg-red rounded-lg pa-3 mt-2">
                     <Registrar/>
+                </div>
+            </div>
+            <div>
+                <div class="bg-red rounded-lg pa-3 mt-2">
+                    <Browse_Debenture_paper/>
                 </div>
             </div>
         </div>
@@ -94,11 +87,10 @@ import EndDate from "./EndDate.vue"
 import InterestsFrequency from "./InterestsFrequency.vue"
 import InterestPercent from "./InterestPercent.vue"
 import Detail_Note from "./Detail_Note.vue"
-import TotalInvest from "./TotalInvest.vue"
-import Total_Invest_Mom from "./Total_Invest_Mom.vue"
-import Total_Invest_Goi from "./Total_Invest_Goi.vue"
 import Agency from "./Agency.vue"
 import Registrar from "./Registrar.vue"
 import DebentureCode from "./DebentureCode.vue"
+import Browse_Debenture_paper from "./Browse_Debenture_paper.vue"
+import Total_Investment_form from "./Total_Investment_form.vue"
 
 </script>

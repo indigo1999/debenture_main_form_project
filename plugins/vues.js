@@ -16,7 +16,14 @@ const store = createStore({
             end_date : "",
             interest_freq : "",
             interest_percent : "",
-            detail_note : ""
+            detail_note : "",
+            investment : {
+                total : 0,
+                mom : 0,
+                goi : 0,
+                gam : 0,
+                game : 0
+            }
         }
     },
     mutations : {
@@ -67,6 +74,26 @@ const store = createStore({
             state.detail_note = detail_note
             console.log("detail note : "+state.detail_note)
         },
+        set_total_investment(state , total){
+            state.investment.total = total
+            console.log("Total invest : "+state.investment.total)
+        },
+        set_total_invest_mom(state, mom){
+            state.investment.mom = mom
+            console.log("Invest mom : "+state.investment.mom)
+        },
+        set_total_invest_goi(state, goi){
+            state.investment.goi = goi
+            console.log("Invest goi : "+state.investment.goi)
+        },
+        set_total_invest_gam(state , gam){
+            state.investment.gam = gam
+            console.log("Invest gam : "+state.investment.gam)
+        },
+        set_total_invest_game(state, game){
+            state.investment.game = game
+            console.log("Invest game : "+state.investment.game)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -106,7 +133,22 @@ const store = createStore({
         },
         set_detail_note({ commit }, detail_note) {
             commit("set_detail_note",detail_note)
-        }
+        },
+        set_total_investment({ commit } , total){
+            commit("set_total_investment",total)
+        },
+        set_total_invest_mom({ commit }, mom){
+            commit("set_total_invest_mom",mom)
+        },
+        set_total_invest_goi({ commit }, goi){
+            commit("set_total_invest_goi",goi)
+        },
+        set_total_invest_gam({ commit } , gam){
+            commit("set_total_invest_gam",gam)
+        },
+        set_total_invest_game({ commit }, game){
+            commit("set_total_invest_game",game)
+        },
 
     },
     computed : {
