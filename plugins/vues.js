@@ -23,7 +23,9 @@ const store = createStore({
                 goi : 0,
                 gam : 0,
                 game : 0
-            }
+            },
+            agency_name : "",
+            registrar_name : ""
         }
     },
     mutations : {
@@ -94,6 +96,14 @@ const store = createStore({
             state.investment.game = game
             console.log("Invest game : "+state.investment.game)
         },
+        set_agency_name(state , agency_name) {
+            state.agency_name = agency_name
+            console.log("agency_name : "+state.agency_name)
+        },
+        set_registrar_name(state , registrar_name) {
+            state.registrar_name = registrar_name
+            console.log("registrar_name : "+state.registrar_name)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -149,6 +159,12 @@ const store = createStore({
         set_total_invest_game({ commit }, game){
             commit("set_total_invest_game",game)
         },
+        set_agency_name({ commit }, agency_name){
+            commit("set_agency_name",agency_name)
+        },
+        set_registrar_name({ commit }, registrar_name){
+            commit("set_registrar_name",registrar_name)
+        }
 
     },
     computed : {
