@@ -25,7 +25,11 @@ const store = createStore({
                 game : 0
             },
             agency_name : "",
-            registrar_name : ""
+            registrar_name : "",
+            debenture_paper_image : {
+                front_base64 : "",
+                back_base64 : ""
+            },
         }
     },
     mutations : {
@@ -104,6 +108,14 @@ const store = createStore({
             state.registrar_name = registrar_name
             console.log("registrar_name : "+state.registrar_name)
         },
+        set_debenture_paper_image_front(state, image_front_base64){
+            state.debenture_paper_image.front_base64 = image_front_base64
+            console.log("image front base64 : " + state.debenture_paper_image.front_base64)
+        },
+        set_debenture_paper_image_back(state, image_back_base64){
+            state.debenture_paper_image.back_base64 = image_back_base64
+            console.log("image back base64 : " + state.debenture_paper_image.back_base64)
+        },
         //validate later
         validate_date_format(state){
             let val_result = validateDateFormat(state.duration_config)
@@ -164,7 +176,13 @@ const store = createStore({
         },
         set_registrar_name({ commit }, registrar_name){
             commit("set_registrar_name",registrar_name)
-        }
+        },
+        set_debenture_paper_image_front({ commit }, front_base64) {
+            commit("set_debenture_paper_image_front",front_base64)
+        },
+        set_debenture_paper_image_back({ commit }, back_base64) {
+            commit("set_debenture_paper_image_back",back_base64)
+        },
 
     },
     computed : {

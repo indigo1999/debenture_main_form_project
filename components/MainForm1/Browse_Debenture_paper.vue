@@ -6,9 +6,9 @@
                 <v-file-input
                     v-model="file_front"
                     type="file"
-                    label="File input"
-                    placeholder="Upload your documents"
-                    prepend-icon="mdi-paperclip"
+                    label="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
+                    placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
+                    prepend-icon="mdi-camera"
                     @change="handle_front"
                     @click:clear="handle_clear_front"
                 >
@@ -25,8 +25,13 @@
                     </template>
                     </template>
                 </v-file-input>
-                <div>
-                    <v-img v-if="show_file_front == true" :src="image_url_front"/>
+                <div class="bg-purple">
+                    <v-img 
+                    v-if="show_file_front == true" 
+                    :src="image_url_front"
+                    class="mx-auto"
+                    height="300"
+                    max-width="500"/>
                     <v-img
                         v-if="show_file_front == false"
                         class="mx-auto"
@@ -50,9 +55,9 @@
                 <v-file-input
                     v-model="file_back"
                     type="file"
-                    label="File input"
-                    placeholder="Upload your documents"
-                    prepend-icon="mdi-paperclip"
+                    label="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
+                    placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
+                    prepend-icon="mdi-camera"
                     @change="handle_back"
                     @click:clear="handle_clear_back"
                 >
@@ -69,8 +74,13 @@
                     </template>
                     </template>
                 </v-file-input>
-                <div>
-                    <v-img v-if="show_file_back == true" :src="image_url_back"/>
+                <div class="bg-purple">
+                    <v-img 
+                    v-if="show_file_back == true" 
+                    :src="image_url_back"
+                    class="mx-auto"
+                    height="300"
+                    max-width="500"/>
                     <v-img
                         v-if="show_file_back == false"
                         class="mx-auto"
@@ -96,6 +106,7 @@
 
 <script setup>
 import { ref } from "vue"
+import { useStore } from "vuex"
 
 const file_front = ref([])
 const file_back = ref([])
@@ -104,13 +115,16 @@ const image_url_back = ref("")
 const show_file_front = ref(false)
 const show_file_back = ref(false)
 
+const store = useStore()
+
 const handle_front = async (event) => {
     const file = event.target.files[0]; // this is a real File object
     const base64 = await fileToBase64(file);
     image_url_front.value = base64
     const base64_string_front = base64.split(",")[1]
-    console.log(base64_string_front)
+    //console.log(base64_string_front)
     show_file_front.value = true
+    store.dispatch("set_debenture_paper_image_front",base64_string_front)
     // this.$store.commit("setFileBase64", base64);
 }
 
@@ -118,6 +132,8 @@ const handle_clear_front = () => {
     file_front.value = []
     image_url_front.value = ""
     show_file_front.value = false
+    store.dispatch("set_debenture_paper_image_front","")
+    
 }
 
 const handle_back = async (event) => {
@@ -125,8 +141,9 @@ const handle_back = async (event) => {
     const base64 = await fileToBase64(file);
     image_url_back.value = base64
     const base64_string_back = base64.split(",")[1]
-    console.log(base64_string_back)
+    //console.log(base64_string_back)
     show_file_back.value = true
+    store.dispatch("set_debenture_paper_image_back",base64_string_back)
     // this.$store.commit("setFileBase64", base64);
 }
 
@@ -134,6 +151,7 @@ const handle_clear_back = () => {
     file_back.value = []
     image_url_back.value = ""
     show_file_back.value = false
+    store.dispatch("set_debenture_paper_image_back","")
 }
 
 function fileToBase64(file) {
