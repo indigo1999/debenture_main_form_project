@@ -1,9 +1,6 @@
 <template>
     <div>
         <div>
-            <h1>MAIN PART 1/2 COMPONENT</h1>
-        </div>
-        <div>
             <div>
                 <div class="bg-red rounded-lg pa-3 mt-2 d-flex justify-center">
                     <CurrentDateTime/>

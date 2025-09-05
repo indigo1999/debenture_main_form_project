@@ -1,22 +1,27 @@
 <template>
     <div>
         <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>Interest Frequency</h2>
+            <h2>ความถี่การชำระดอก</h2>
             <div>
-                <v-row>
+                <v-row 
+                align="center"
+                no-gutters>
                     <v-col class="bg-green rounded-lg pa-3 mt-2">
-                        ความถี่การจ่ายดอก
-                    </v-col>
-                    <v-col class="bg-green rounded-lg pa-3 mt-2">
-                        <v-select
-                            v-model="select_frequency.value.value"
-                            :error-messages="select_frequency.errorMessage.value"
-                            :items="select_frequency_items"
-                            label="เลือกจำนวนครั้ง"
-                        ></v-select>
-                    </v-col>
-                    <v-col class="bg-green rounded-lg pa-3 mt-2">
-                        ครั้ง / ปี
+                        <v-row>
+                            <v-select
+                                class="ma-2 pa-2 align-self-center"
+                                max-width="'100%'"
+                                v-model="select_frequency.value.value"
+                                :error-messages="select_frequency.errorMessage.value"
+                                :items="select_frequency_items"
+                                label="เลือกจำนวนครั้ง"
+                            ></v-select>
+                            <v-col class="pa-5">
+                                <h1>
+                                : ครั้ง / ปี
+                                </h1>
+                            </v-col>
+                        </v-row>
                     </v-col>
                 </v-row>
             </div>

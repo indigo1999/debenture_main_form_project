@@ -1,45 +1,50 @@
 <template>
     <div>
         <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2> Duration Config</h2>
+            <h2>ระยะเวลาหุ้นกู้</h2>
             <div>
                 <form @submit.prevent="submit">
-                    <v-row>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            ระยะเวลาหุ้นกู้
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
+                    <v-row
+                     align="center"
+                     no-gutters>
+                        <v-col 
+                        class="bg-green rounded-lg pa-3 mt-2" 
+                        cols="4">
+                            <h3>
+                                เลือกจำนวนปี
+                            </h3>
                             <v-select
+                                class="ma-2 pa-2 align-self-center"
+                                max-width="'100%'"
                                 v-model="select_year.value.value"
                                 :error-messages="select_year.errorMessage.value"
                                 :items="select_year_items"
-                                label="เลือกจำนวนปี"
+                                label="กี่ปี"
                             ></v-select>
                         </v-col>
                         <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            ปี
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
+                            <h3>
+                                เลือกจำนวนเดือน
+                            </h3>
                             <v-select
+                                class="ma-2 pa-2 align-self-center"
                                 v-model="select_month.value.value"
                                 :error-messages="select_month.errorMessage.value"
                                 :items="select_month_items"
-                                label="เลือกจำนวนเดือน"
+                                label="กี่เดือน"
                             ></v-select>
                         </v-col>
                         <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            เดือน
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
+                            <h3>
+                                เลือกจำนวนวัน
+                            </h3>
                             <v-select
+                                class="ma-2 pa-2 align-self-center"
                                 v-model="select_day.value.value"
                                 :error-messages="select_day.errorMessage.value"
                                 :items="select_day_items"
-                                label="เลือกจำนวนวัน"
+                                label="กี่วัน"
                             ></v-select>
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            วัน
                         </v-col>
                     </v-row>
                     <!-- <v-row>

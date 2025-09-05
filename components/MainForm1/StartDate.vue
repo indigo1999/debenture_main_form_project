@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>Start Date</h2>
+            <h2>วันเดือนปีที่เริ่มสัญญา</h2>
             <div>
                 <VueDatePicker 
                 class="dp__theme_light"

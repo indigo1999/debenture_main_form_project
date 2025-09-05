@@ -1,13 +1,12 @@
 <template>
     <div>
         <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2> Debenture Code</h2>
+            <h2>รหัสหุ้นกู้</h2>
             <div>
                 <form @submit.prevent="submit">
                     <v-text-field
                         ref="name_input"
                         v-model="debenture_code.value.value"
-                        :counter="10"
                         :error-messages="debenture_code.errorMessage.value"
                         label="รหัสหุ้นกู้"
                     ></v-text-field>

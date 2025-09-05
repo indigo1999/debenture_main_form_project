@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2> Debenture name</h2>
+            <h2>ชื่อหุ้นกู้</h2>
             <div>
                 <form @submit.prevent="submit">
                     <v-text-field
@@ -26,12 +26,12 @@ const store = useStore()
 const { handleSubmit, handleReset } = useForm({
     validationSchema : {
         name (value) {
-            if (value?.length >= 2) {
+            if (value?.length >= 1) {
                 store.dispatch("set_debenture_name",value);
                 return true 
             }
 
-            return "Name needs to be at least 2 characters."
+            return "กรุณากรอกชื่อหุ้นกู้"
         }
     }
 })
