@@ -1,14 +1,18 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <!-- <div class="d-flex justify-center">
-                <h2> {{ formattedTime }}</h2>
-            </div> -->
-            <div class="d-flex justify-center">
-                <h2> {{ current_date_dd_mm_yyy() }}</h2>
+        <v-sheet
+        class="d-flex justify-center align-center mb-6"
+        :elevation="9"
+        rounded="">
+            <div class="bg-white rounded-lg pa-3">
+                <!-- <div class="d-flex justify-center">
+                    <h2> {{ formattedTime }}</h2>
+                </div> -->
+                <div class="d-flex justify-center">
+                    <h2> {{ current_date_dd_mm_yyy() }}</h2>
+                </div>
             </div>
-            
-        </div>
+        </v-sheet>
     </div>
 </template>
 

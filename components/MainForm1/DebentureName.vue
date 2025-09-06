@@ -1,19 +1,24 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>ชื่อหุ้นกู้</h2>
-            <div>
-                <form @submit.prevent="submit">
-                    <v-text-field
-                        ref="name_input"
-                        v-model="name.value.value"
-                        :counter="10"
-                        :error-messages="name.errorMessage.value"
-                        label="ชื่อหุ้นกู้"
-                    ></v-text-field>
-                </form>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>ชื่อหุ้นกู้</h2>
+                <div>
+                    <form>
+                        <v-text-field
+                            ref="name_input"
+                            v-model="name.value.value"
+                            :counter="10"
+                            :error-messages="name.errorMessage.value"
+                            label="ชื่อหุ้นกู้"
+                        ></v-text-field>
+                    </form>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

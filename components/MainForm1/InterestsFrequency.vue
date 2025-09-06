@@ -1,31 +1,36 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>ความถี่การชำระดอก</h2>
-            <div>
-                <v-row 
-                align="center"
-                no-gutters>
-                    <v-col class="bg-green rounded-lg pa-3 mt-2">
-                        <v-row>
-                            <v-select
-                                class="ma-2 pa-2 align-self-center"
-                                max-width="'100%'"
-                                v-model="select_frequency.value.value"
-                                :error-messages="select_frequency.errorMessage.value"
-                                :items="select_frequency_items"
-                                label="เลือกจำนวนครั้ง"
-                            ></v-select>
-                            <v-col class="pa-5">
-                                <h1>
-                                : ครั้ง / ปี
-                                </h1>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                </v-row>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>ความถี่การชำระดอก</h2>
+                <div>
+                    <v-row 
+                    align="center"
+                    no-gutters>
+                        <v-col class="pa-3 mt-2">
+                            <v-row>
+                                <v-select
+                                    class="ma-2 pa-2 align-self-center"
+                                    max-width="'100%'"
+                                    v-model="select_frequency.value.value"
+                                    :error-messages="select_frequency.errorMessage.value"
+                                    :items="select_frequency_items"
+                                    label="เลือกจำนวนครั้ง"
+                                ></v-select>
+                                <v-col class="pa-5">
+                                    <h1>
+                                    : ครั้ง / ปี
+                                    </h1>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

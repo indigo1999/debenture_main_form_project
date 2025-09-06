@@ -7,10 +7,9 @@
         <div class="bg-surface-light position-relative py-3 ps-3">
           <div class="position-relative pe-3" style="max-height:max-content">
             <div>
-              <div>
+              <div class="d-flex justify-center">
                 <Header_/>
               </div>
-              Relative parent
             </div>
             <div class="position-relative" style="">
               <div class="bg-info rounded-lg pa-3 mt-2">
@@ -79,10 +78,6 @@ import MainForm2 from "./components/MainForm2.vue"
 import ButtonSubmit from "./components/ButtonSubmit.vue"
 
 export default {
-  mounted() {
-    console.log(this.$store.state.count)
-    const {data : count} = this.$store.state.count
-  },
   // methods : {
   //   increment() {
   //     this.$store.commit('increment')

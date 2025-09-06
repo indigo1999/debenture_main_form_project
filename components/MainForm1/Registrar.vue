@@ -1,18 +1,23 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>Registrar</h2>
-            <div>
-                <form>
-                    <v-text-field
-                        ref="agency_input"
-                        v-model="registrar_name.value.value"
-                        :error-messages="registrar_name.errorMessage.value"
-                        label="นายทะเบียน"
-                    ></v-text-field>
-                </form>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>นายทะเบียน</h2>
+                <div>
+                    <form>
+                        <v-text-field
+                            ref="agency_input"
+                            v-model="registrar_name.value.value"
+                            :error-messages="registrar_name.errorMessage.value"
+                            label="นายทะเบียน"
+                        ></v-text-field>
+                    </form>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

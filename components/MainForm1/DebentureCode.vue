@@ -1,18 +1,23 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>รหัสหุ้นกู้</h2>
-            <div>
-                <form @submit.prevent="submit">
-                    <v-text-field
-                        ref="name_input"
-                        v-model="debenture_code.value.value"
-                        :error-messages="debenture_code.errorMessage.value"
-                        label="รหัสหุ้นกู้"
-                    ></v-text-field>
-                </form>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>รหัสหุ้นกู้</h2>
+                <div>
+                    <form>
+                        <v-text-field
+                            ref="name_input"
+                            v-model="debenture_code.value.value"
+                            :error-messages="debenture_code.errorMessage.value"
+                            label="รหัสหุ้นกู้"
+                        ></v-text-field>
+                    </form>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

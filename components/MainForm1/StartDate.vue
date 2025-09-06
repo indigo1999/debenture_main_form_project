@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>วันเดือนปีที่เริ่มสัญญา</h2>
+        <div class="bg-white rounded-lg pa-1 mt-1">
+            <h2>วันที่เริ่มสัญญา</h2>
             <div>
                 <VueDatePicker 
                 class="dp__theme_light"
@@ -37,7 +37,7 @@ const format = (date) => {
 <style>
 
 .dp__theme_light {
-    --dp-background-color: #fcbfdd;
+    --dp-background-color: #d2fff7;
     --dp-text-color: #212121;
     --dp-hover-color: #f3f3f3;
     --dp-hover-text-color: #212121;

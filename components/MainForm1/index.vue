@@ -2,70 +2,79 @@
     <div>
         <div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2 d-flex justify-center">
+                <div class="pa-3 mt-2 d-flex justify-center">
                     <CurrentDateTime/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2 ">
+                <div class="pa-3 mt-2 ">
                     <Debenturename/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <DurationConfig/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <DebentureCode/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
-                    <v-row>
-                        <v-col>
-                            <StartDate/>
-                        </v-col>
-                        <v-col>
-                            <EndDate/>
-                        </v-col>
-                    </v-row>
-                    
+                <div class="pa-3 mt-2">
+                    <v-sheet
+                    class="pa-3 mt-1"
+                    :elevation="9"
+                    rounded>
+                        <v-row>
+                            <v-col>
+                                <StartDate/>
+                            </v-col>
+                            <v-col>
+                                <EndDate/>
+                            </v-col>
+                        </v-row>
+                    </v-sheet>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <InterestsFrequency/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <InterestPercent/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <Detail_Note/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
-                    <Total_Investment_form/>
+                <div class="pa-3 mt-2">
+                    <v-sheet
+                    class="pa-3 mt-1"
+                    :elevation="9"
+                    rounded>
+                        <Total_Investment_form/>
+                    </v-sheet>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <Agency/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <Registrar/>
                 </div>
             </div>
             <div>
-                <div class="bg-red rounded-lg pa-3 mt-2">
+                <div class="pa-3 mt-2">
                     <Browse_Debenture_paper/>
                 </div>
             </div>

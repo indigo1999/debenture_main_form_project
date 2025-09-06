@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-4">
+        <div class="bg-white rounded-lg pa-2 mt-1">
             <div>
                 <h2>จำนวนเงินต้น</h2>
             </div>
@@ -17,7 +17,7 @@
         <div>
             <v-row>
                 <v-col>
-                    <div class="bg-white rounded-lg pa-3 mt-8">
+                    <div class="bg-white rounded-lg pa-3 mt-2">
                         <div>
                             <h2>จำนวนเงินต้นของแม่</h2>
                         </div>
@@ -33,7 +33,7 @@
                     </div>
                 </v-col>
                 <v-col>
-                    <div class="bg-white rounded-lg pa-3 mt-8">
+                    <div class="bg-white rounded-lg pa-3 mt-2">
                         <div>
                             <h2>จำนวนเงินต้นของก้อย</h2>
                         </div>
@@ -51,7 +51,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <div class="bg-white rounded-lg pa-3 mt-2">
+                    <div class="bg-white rounded-lg pa-3 mt-1">
                         <div>
                             <h2>จำนวนเงินต้นของแก้ม</h2>
                         </div>
@@ -67,7 +67,7 @@
                     </div>
                 </v-col>
                 <v-col>
-                    <div class="bg-white rounded-lg pa-3 mt-2">
+                    <div class="bg-white rounded-lg pa-3 mt-1">
                         <div>
                             <h2>จำนวนเงินต้นของเกม</h2>
                         </div>
@@ -93,12 +93,14 @@
             <div>
                 <ALERT_WRONG_RATIO/>
             </div>
-            <v-btn
-                color="success"
-                @click="invalid_ratio_status = false"
-            >
-                Hide Overlay
-            </v-btn>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                    color="red"
+                    @click="invalid_ratio_status = false"
+                >
+                    ปิดการแจ้งเตือน
+                </v-btn>
+            </div>
         </v-overlay>
     </div>
 </template>
@@ -147,7 +149,7 @@ function alert_invalid_ratio (all_,mom_,goi_,gam_,game_) {
     
 }
 
-watch(() => {
+watchEffect(() => {
     if (total_investment_all.value != "" 
     && total_investment_mom.value != ""
     && total_investment_goi.value != ""

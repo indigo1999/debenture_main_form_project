@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
+        <div class="bg-white rounded-lg pa-1 mt-1">
             <h2>วันเดือนปีที่หมดสัญญา</h2>
             <div>
                 <VueDatePicker 

@@ -1,18 +1,23 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>รายละเอียดประกอบ (หากมี)</h2>
-            <div>
-                <v-container fluid>
-                    <v-textarea
-                    clear-icon="mdi-close-circle"
-                    label="พิมพ์หมายเหตุ (ถ้ามี)"
-                    v-model="detail_note"
-                    clearable
-                    ></v-textarea>
-                </v-container>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>รายละเอียดประกอบ (หากมี)</h2>
+                <div>
+                    <v-container fluid>
+                        <v-textarea
+                        clear-icon="mdi-close-circle"
+                        label="พิมพ์หมายเหตุ (ถ้ามี)"
+                        v-model="detail_note"
+                        clearable
+                        ></v-textarea>
+                    </v-container>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

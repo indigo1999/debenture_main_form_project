@@ -1,106 +1,117 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>Browse Debenture paper</h2>
-            <div>
-                <v-file-input
-                    v-model="file_front"
-                    type="file"
-                    label="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
-                    placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
-                    prepend-icon="mdi-camera"
-                    @change="handle_front"
-                    @click:clear="handle_clear_front"
-                >
-                    <template v-slot:selection="{ fileNames }">
-                    <template v-for="fileName in fileNames" :key="fileName">
-                        <v-chip
-                        class="me-2"
-                        color="primary"
-                        size="small"
-                        label
-                        >
-                        {{ fileName }}
-                        </v-chip>
-                    </template>
-                    </template>
-                </v-file-input>
-                <div class="bg-purple">
-                    <v-img 
-                    v-if="show_file_front == true" 
-                    :src="image_url_front"
-                    class="mx-auto"
-                    height="300"
-                    max-width="500"/>
-                    <v-img
-                        v-if="show_file_front == false"
-                        class="mx-auto"
-                        height="300"
-                        lazy-src="https://picsum.photos/id/11/100/60"
-                        max-width="500"
-                        src="https://bad.src/not/valid"
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>เลือกรูปภาพใบหุ้นกู้ ส่วนหน้า และ ส่วนหลัง</h2>
+                <div>
+                    <v-file-input
+                        class="mt-5"
+                        v-model="file_front"
+                        type="file"
+                        label="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
+                        placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหน้า"
+                        prepend-icon="mdi-camera"
+                        @change="handle_front"
+                        @click:clear="handle_clear_front"
                     >
-                        <template v-slot:placeholder>
-                        <div class="d-flex align-center justify-center fill-height">
-                            <v-progress-circular
-                            color="grey-lighten-4"
-                            indeterminate
-                            ></v-progress-circular>
-                        </div>
+                        <template v-slot:selection="{ fileNames }">
+                        <template v-for="fileName in fileNames" :key="fileName">
+                            <v-chip
+                            class="me-2"
+                            color="primary"
+                            size="small"
+                            label
+                            >
+                            {{ fileName }}
+                            </v-chip>
                         </template>
-                    </v-img>
+                        </template>
+                    </v-file-input>
+                    <div class="bg-green rounded">
+                        <div class="d-flex justify-center">
+                            <v-img 
+                            v-if="show_file_front == true" 
+                            :src="image_url_front"
+                            class="mx-auto"
+                            height="300"
+                            max-width="500"/>
+                            <v-img
+                                v-if="show_file_front == false"
+                                class="mx-auto"
+                                height="300"
+                                lazy-src="https://picsum.photos/id/11/100/60"
+                                max-width="500"
+                                src="https://bad.src/not/valid"
+                            >
+                                <template v-slot:placeholder>
+                                <div class="d-flex align-center justify-center fill-height">
+                                    <v-progress-circular
+                                    color="grey-lighten-4"
+                                    indeterminate
+                                    ></v-progress-circular>
+                                </div>
+                                </template>
+                            </v-img>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <v-file-input
+                        class="mt-9"
+                        v-model="file_back"
+                        type="file"
+                        label="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
+                        placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
+                        prepend-icon="mdi-camera"
+                        @change="handle_back"
+                        @click:clear="handle_clear_back"
+                    >
+                        <template v-slot:selection="{ fileNames }">
+                        <template v-for="fileName in fileNames" :key="fileName">
+                            <v-chip
+                            class="me-2"
+                            color="primary"
+                            size="small"
+                            label
+                            >
+                            {{ fileName }}
+                            </v-chip>
+                        </template>
+                        </template>
+                    </v-file-input>
+                    <div class="bg-green rounded">
+                        <div class="d-flex justify-center">
+                            <v-img 
+                            v-if="show_file_back == true" 
+                            :src="image_url_back"
+                            class="mx-auto"
+                            height="300"
+                            max-width="500"/>
+                            <v-img
+                                v-if="show_file_back == false"
+                                class="mx-auto"
+                                height="300"
+                                lazy-src="https://picsum.photos/id/11/100/60"
+                                max-width="500"
+                                src="https://bad.src/not/valid"
+                            >
+                                <template v-slot:placeholder>
+                                <div class="d-flex align-center justify-center fill-height">
+                                    <v-progress-circular
+                                    color="grey-lighten-4"
+                                    indeterminate
+                                    ></v-progress-circular>
+                                </div>
+                                </template>
+                            </v-img>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <v-file-input
-                    v-model="file_back"
-                    type="file"
-                    label="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
-                    placeholder="เลือกรูปใบหุ้นกู้ ส่วนด้านหลัง"
-                    prepend-icon="mdi-camera"
-                    @change="handle_back"
-                    @click:clear="handle_clear_back"
-                >
-                    <template v-slot:selection="{ fileNames }">
-                    <template v-for="fileName in fileNames" :key="fileName">
-                        <v-chip
-                        class="me-2"
-                        color="primary"
-                        size="small"
-                        label
-                        >
-                        {{ fileName }}
-                        </v-chip>
-                    </template>
-                    </template>
-                </v-file-input>
-                <div class="bg-purple">
-                    <v-img 
-                    v-if="show_file_back == true" 
-                    :src="image_url_back"
-                    class="mx-auto"
-                    height="300"
-                    max-width="500"/>
-                    <v-img
-                        v-if="show_file_back == false"
-                        class="mx-auto"
-                        height="300"
-                        lazy-src="https://picsum.photos/id/11/100/60"
-                        max-width="500"
-                        src="https://bad.src/not/valid"
-                    >
-                        <template v-slot:placeholder>
-                        <div class="d-flex align-center justify-center fill-height">
-                            <v-progress-circular
-                            color="grey-lighten-4"
-                            indeterminate
-                            ></v-progress-circular>
-                        </div>
-                        </template>
-                    </v-img>
-                </div>
-            </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 

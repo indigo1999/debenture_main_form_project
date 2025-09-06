@@ -1,65 +1,71 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>ระยะเวลาหุ้นกู้</h2>
-            <div>
-                <form @submit.prevent="submit">
-                    <v-row
-                     align="center"
-                     no-gutters>
-                        <v-col 
-                        class="bg-green rounded-lg pa-3 mt-2" 
-                        cols="4">
-                            <h3>
-                                เลือกจำนวนปี
-                            </h3>
-                            <v-select
-                                class="ma-2 pa-2 align-self-center"
-                                max-width="'100%'"
-                                v-model="select_year.value.value"
-                                :error-messages="select_year.errorMessage.value"
-                                :items="select_year_items"
-                                label="กี่ปี"
-                            ></v-select>
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            <h3>
-                                เลือกจำนวนเดือน
-                            </h3>
-                            <v-select
-                                class="ma-2 pa-2 align-self-center"
-                                v-model="select_month.value.value"
-                                :error-messages="select_month.errorMessage.value"
-                                :items="select_month_items"
-                                label="กี่เดือน"
-                            ></v-select>
-                        </v-col>
-                        <v-col class="bg-green rounded-lg pa-3 mt-2">
-                            <h3>
-                                เลือกจำนวนวัน
-                            </h3>
-                            <v-select
-                                class="ma-2 pa-2 align-self-center"
-                                v-model="select_day.value.value"
-                                :error-messages="select_day.errorMessage.value"
-                                :items="select_day_items"
-                                label="กี่วัน"
-                            ></v-select>
-                        </v-col>
-                    </v-row>
-                    <!-- <v-row>
-                        <div>
-                            <v-btn
-                            class="me-4"
-                            @click="submit_duration_config"
-                            >
-                            submit
-                            </v-btn>
-                        </div>
-                    </v-row> -->
-                </form>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>ระยะเวลาหุ้นกู้</h2>
+                <div>
+                    <form @submit.prevent="submit">
+                        <v-row
+                        align="center"
+                        no-gutters
+                        class="ga-7">
+                            <v-col 
+                            class="bg-green rounded-lg pa-3 mt-2" 
+                            cols="4">
+                                <h3>
+                                    เลือกจำนวนปี
+                                </h3>
+                                <v-select
+                                    class="ma-2 pa-2 align-self-center"
+                                    max-width="'100%'"
+                                    v-model="select_year.value.value"
+                                    :error-messages="select_year.errorMessage.value"
+                                    :items="select_year_items"
+                                    label="กี่ปี"
+                                ></v-select>
+                            </v-col>
+                            <v-col class="bg-green rounded-lg pa-3 mt-2">
+                                <h3>
+                                    เลือกจำนวนเดือน
+                                </h3>
+                                <v-select
+                                    class="ma-2 pa-2 align-self-center"
+                                    v-model="select_month.value.value"
+                                    :error-messages="select_month.errorMessage.value"
+                                    :items="select_month_items"
+                                    label="กี่เดือน"
+                                ></v-select>
+                            </v-col>
+                            <v-col class="bg-green rounded-lg pa-3 mt-2">
+                                <h3>
+                                    เลือกจำนวนวัน
+                                </h3>
+                                <v-select
+                                    class="ma-2 pa-2 align-self-center"
+                                    v-model="select_day.value.value"
+                                    :error-messages="select_day.errorMessage.value"
+                                    :items="select_day_items"
+                                    label="กี่วัน"
+                                ></v-select>
+                            </v-col>
+                        </v-row>
+                        <!-- <v-row>
+                            <div>
+                                <v-btn
+                                class="me-4"
+                                @click="submit_duration_config"
+                                >
+                                submit
+                                </v-btn>
+                            </div>
+                        </v-row> -->
+                    </form>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 
@@ -74,7 +80,7 @@ const store = useStore();
 const initial_date = ref({ year: "", month: "", day: "" })
 
 
-watch(() => {
+watchEffect(() => {
     const valid_date_object = validateDateFormat(initial_date.value)
     const is_valid_date = valid_date_object.valid
     const day = valid_date_object.days

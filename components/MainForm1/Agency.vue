@@ -1,18 +1,23 @@
 <template>
     <div>
-        <div class="bg-white rounded-lg pa-3 mt-2">
-            <h2>Agency</h2>
-            <div>
-                <form>
-                    <v-text-field
-                        ref="agency_input"
-                        v-model="agency_name.value.value"
-                        :error-messages="agency_name.errorMessage.value"
-                        label="ชื่อผู้แทนจัดจำหน่าย"
-                    ></v-text-field>
-                </form>
+        <v-sheet
+        class="pa-3 mt-1"
+        :elevation="9"
+        rounded>
+            <div class="bg-white rounded-lg pa-1 mt-1">
+                <h2>ผู้แทนจัดจำหน่าย</h2>
+                <div>
+                    <form>
+                        <v-text-field
+                            ref="agency_input"
+                            v-model="agency_name.value.value"
+                            :error-messages="agency_name.errorMessage.value"
+                            label="ชื่อผู้แทนจัดจำหน่าย"
+                        ></v-text-field>
+                    </form>
+                </div>
             </div>
-        </div>
+        </v-sheet>
     </div>
 </template>
 
