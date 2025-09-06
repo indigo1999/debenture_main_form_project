@@ -6,11 +6,7 @@ const store = createStore({
         return {
             count : 0,
             debenture_name : "",
-            duration_config : {
-                year : "",
-                month : "",
-                day : ""
-            },
+            duration_config : "",
             debenture_code : "",
             start_date : "",
             end_date : "",
@@ -44,17 +40,9 @@ const store = createStore({
             console.log("debenture name : "+state.debenture_name)
             // alert("debenture name : "+state.debenture_name)
         },
-        set_duration_config_year(state,duration_config_year){
-            state.duration_config.year = duration_config_year
-            console.log("duration config year: "+state.duration_config.year)
-        },
-        set_duration_config_month(state,duration_config_month){
-            state.duration_config.month = duration_config_month
-            console.log("duration config month: "+state.duration_config.month)
-        },
-        set_duration_config_day(state,duration_config_day){
-            state.duration_config.day = duration_config_day
-            console.log("duration config day: "+state.duration_config.day)
+        set_duration_config(state,duration_config){
+            state.duration_config = duration_config
+            console.log("duration config :"+state.duration_config)
         },
         set_debenture_code(state,debenture_code) {
             state.debenture_code = debenture_code
@@ -129,14 +117,8 @@ const store = createStore({
         set_debenture_name({ commit }, debenture_name) {
             commit("set_debenture_name",debenture_name)
         },
-        set_duration_config_year({ commit}, duration_config_year) {
-            commit("set_duration_config_year",duration_config_year)
-        },
-        set_duration_config_month({ commit}, duration_config_month) {
-            commit("set_duration_config_month",duration_config_month)
-        },
-        set_duration_config_day({ commit}, duration_config_day) {
-            commit("set_duration_config_day",duration_config_day)
+        set_duration_config({ commit}, duration_config) {
+            commit("set_duration_config",duration_config)
         },
         set_debenture_code({ commit }, debenture_code) {
             commit("set_debenture_code",debenture_code)

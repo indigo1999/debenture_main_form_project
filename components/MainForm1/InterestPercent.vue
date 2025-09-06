@@ -43,11 +43,12 @@ import { useField, useForm } from "vee-validate"
 const store = useStore()
 
 const percent_str = ref(["",""])
+const percent_str_complete = ref("")
 
-onUpdated(() => {
+watch(() => {
     let pc_str = percent_str.value
-    let log = pc_str[0] + "." + pc_str[1]
-    console.log(log)
+    percent_str_complete.value = pc_str[0] + "." + pc_str[1]
+    store.dispatch("set_interest_percent",percent_str_complete.value)
 })
 
 const { handleSubmit, handleReset } = useForm({
@@ -71,6 +72,7 @@ const { handleSubmit, handleReset } = useForm({
             } else {
                 //just give decimal as .000
                 percent_str.value[1] = "00"
+                return true
             }
 
         },

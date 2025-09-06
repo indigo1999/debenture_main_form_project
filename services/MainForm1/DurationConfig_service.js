@@ -31,6 +31,10 @@ export function validateDateFormat(input) {
     return { valid: false, message: "Days must be between 0 and 30." };
   }
 
+  if (days == 0 && months == 0 && years == 0){
+    return { valid : false, message : "There isn't any debenture with this duration."}
+  }
+
   return {
     valid: true,
     years,

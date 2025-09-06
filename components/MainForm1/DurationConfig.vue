@@ -71,14 +71,27 @@ import { validateDateFormat } from "../../services/MainForm1/DurationConfig_serv
 
 const store = useStore();
 
-const initial_date = { year: "", month: "", day: "" }
+const initial_date = ref({ year: "", month: "", day: "" })
+
+
+watch(() => {
+    const valid_date_object = validateDateFormat(initial_date.value)
+    const is_valid_date = valid_date_object.valid
+    const day = valid_date_object.days
+    const month = valid_date_object.months
+    const year = valid_date_object.years
+
+    const duration = `${year} ปี ${month} เดือน  ${day} วัน`    
+    is_valid_date ? store.dispatch("set_duration_config",duration)
+    : console.log("INVALID DATE")
+    
+})
 
 const { handleSubmit , handleReset} = useForm({
     validationSchema : {
         select_year (value) {
             if (value) {
-                initial_date.year = value
-                store.dispatch("set_duration_config_year",initial_date.year)
+                initial_date.value.year = value
                 return true
             }
 
@@ -86,8 +99,7 @@ const { handleSubmit , handleReset} = useForm({
         },
         select_month (value) {
             if (value) {
-                initial_date.month = value
-                store.dispatch("set_duration_config_month",initial_date.month)
+                initial_date.value.month = value
                 return true
             }
 
@@ -95,8 +107,7 @@ const { handleSubmit , handleReset} = useForm({
         },
         select_day (value) {
             if (value) {
-                initial_date.day = value
-                store.dispatch("set_duration_config_day",initial_date.day)
+                initial_date.value.day = value
                 return true
             }
 

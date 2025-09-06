@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>ALERT GAM</h1>
+        <h1>WRONG RATIO</h1>
     </div>
 </template>

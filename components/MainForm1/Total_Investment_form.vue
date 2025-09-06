@@ -2,14 +2,14 @@
     <div>
         <div class="bg-white rounded-lg pa-3 mt-4">
             <div>
-                <h2> Total Investment : </h2>
+                <h2>จำนวนเงินต้น</h2>
             </div>
             <div>
                 <v-text-field
                     type="number"
                     v-model="total_investment_all"
                     hide-details="auto"
-                    label="Total Investment"
+                    label="กรอกจำนวนเงินต้น"
                     clearable
                 ></v-text-field>
             </div>
@@ -19,14 +19,14 @@
                 <v-col>
                     <div class="bg-white rounded-lg pa-3 mt-8">
                         <div>
-                            <h2>Total Invest Mom</h2>
+                            <h2>จำนวนเงินต้นของแม่</h2>
                         </div>
                         <div>
                             <v-text-field
                                 type="number"
                                 v-model="total_investment_mom"
                                 hide-details="auto"
-                                label="Total Investment Mom"
+                                label="กรอกจำนวนเงินต้นของแม่"
                                 clearable
                             ></v-text-field>
                         </div>
@@ -35,14 +35,14 @@
                 <v-col>
                     <div class="bg-white rounded-lg pa-3 mt-8">
                         <div>
-                            <h2>Total Invest Goi</h2>
+                            <h2>จำนวนเงินต้นของก้อย</h2>
                         </div>
                         <div>
                             <v-text-field
                                 type="number"
                                 v-model="total_investment_goi"
                                 hide-details="auto"
-                                label="Total Investment Goi"
+                                label="กรอกจำนวนเงินต้นของก้อย"
                                 clearable
                             ></v-text-field>
                         </div>
@@ -53,14 +53,14 @@
                 <v-col>
                     <div class="bg-white rounded-lg pa-3 mt-2">
                         <div>
-                            <h2>Total Invest Gam</h2>
+                            <h2>จำนวนเงินต้นของแก้ม</h2>
                         </div>
                         <div>
                             <v-text-field
                                 type="number"
                                 v-model="total_investment_gam"
                                 hide-details="auto"
-                                label="Total Investment Gam"
+                                label="กรอกจำนวนเงินต้นของแก้ม"
                                 clearable
                             ></v-text-field>
                         </div>
@@ -69,14 +69,14 @@
                 <v-col>
                     <div class="bg-white rounded-lg pa-3 mt-2">
                         <div>
-                            <h2>Total Invest Game</h2>
+                            <h2>จำนวนเงินต้นของเกม</h2>
                         </div>
                         <div>
                             <v-text-field
                                 type="number"
                                 v-model="total_investment_game"
                                 hide-details="auto"
-                                label="Total Investment Game"
+                                label="กรอกจำนวนเงินต้นของเกม"
                                 clearable
                             ></v-text-field>
                         </div>
@@ -86,169 +86,75 @@
         </div>
 
         <v-overlay
-          v-model="total_investment_all_alert_status"
+          v-model="invalid_ratio_status"
           class="align-center justify-center"
           contained
         >
             <div>
-                <ALERT_ALL/>
+                <ALERT_WRONG_RATIO/>
             </div>
             <v-btn
                 color="success"
-                @click="total_investment_all_alert_status = false"
+                @click="invalid_ratio_status = false"
             >
                 Hide Overlay
             </v-btn>
         </v-overlay>
-
-        <v-overlay
-          v-model="total_investment_mom_alert_status"
-          class="align-center justify-center"
-          contained
-        >
-            <div>
-                <ALERT_MOM/>
-            </div>
-            <v-btn
-                color="success"
-                @click="total_investment_mom_alert_status = false"
-            >
-                Hide Overlay
-            </v-btn>
-        </v-overlay>
-
-        <v-overlay
-          v-model="total_investment_goi_alert_status"
-          class="align-center justify-center"
-          contained
-        >
-            <div>
-                <ALERT_GOI/>
-            </div>
-            <v-btn
-                color="success"
-                @click="total_investment_goi_alert_status = false"
-            >
-                Hide Overlay
-            </v-btn>
-        </v-overlay>
-
-        <v-overlay
-          v-model="total_investment_gam_alert_status"
-          class="align-center justify-center"
-          contained
-        >
-            <div>
-                <ALERT_GAM/>
-            </div>
-            <v-btn
-                color="success"
-                @click="total_investment_gam_alert_status = false"
-            >
-                Hide Overlay
-            </v-btn>
-        </v-overlay>
-
-        <v-overlay
-          v-model="total_investment_game_alert_status"
-          class="align-center justify-center"
-          contained
-        >
-            <div>
-                <ALERT_GAME/>
-            </div>
-            <v-btn
-                color="success"
-                @click="total_investment_game_alert_status = false"
-            >
-                Hide Overlay
-            </v-btn>
-        </v-overlay>
-
-        
-
     </div>
 </template>
 
-<script>
-import ALERT_ALL from "./Total_Investment_alerts/alerts_all.vue"
-import ALERT_MOM from "./Total_Investment_alerts/alerts_mom.vue"
-import ALERT_GOI from "./Total_Investment_alerts/alerts_goi.vue"
-import ALERT_GAM from "./Total_Investment_alerts/alerts_gam.vue"
-import ALERT_GAME from "./Total_Investment_alerts/alerts_game.vue"
+<script setup>
+import ALERT_WRONG_RATIO from "./Total_Investment_alerts/alert_wrong_ratio.vue"
 
-export default {
+import { ref } from "vue"
+import { useStore } from "vuex"
 
-    data : () => {
-        return {
-            total_investment_all : "",
-            total_investment_mom : "",
-            total_investment_goi : "",
-            total_investment_gam : "",
-            total_investment_game : "",
-            total_investment_all_alert_status : false,
-            total_investment_mom_alert_status : false,
-            total_investment_goi_alert_status : false,
-            total_investment_gam_alert_status : false,
-            total_investment_game_alert_status : false,     
-            is_ratio_valid : false
-        }
-    },
-    methods : {
-        alert_total_all () {
-            this.total_investment_all_alert_status = true
-        },
-        alert_total_mom () {
-            this.total_investment_mom_alert_status = true
-        },
-        alert_total_goi () {
-            this.total_investment_goi_alert_status = true
-        },
-        alert_total_gam () {
-            this.total_investment_gam_alert_status = true
-        },
-        alert_total_game () {
-            this.total_investment_game_alert_status = true
-        }
+const store = useStore()
 
-    },
-    components : {
-        ALERT_ALL,
-        ALERT_MOM,
-        ALERT_GOI,
-        ALERT_GAM,
-        ALERT_GAME
-    }, 
-    watch : {
-        total_investment_all(value){
-            (value == "") ? this.total_investment_all = "" 
-            : isNaN(parseInt(value)) ? ( this.alert_total_all() )
-            : this.$store.dispatch("set_total_investment",parseInt(value))
-        },
-        total_investment_mom(value){
-            (value == "") ? this.total_investment_mom = "" 
-            : isNaN(parseInt(value)) ? ( this.alert_total_mom() )
-            : this.$store.dispatch("set_total_invest_mom",parseInt(value))
-        },
-        total_investment_goi(value){
-            (value == "") ? this.total_investment_goi = "" 
-            : isNaN(parseInt(value)) ? ( this.alert_total_goi() )
-            : this.$store.dispatch("set_total_invest_goi",parseInt(value))
-        },
-        total_investment_gam(value){
-            (value == "") ? this.total_investment_gam = "" 
-            : isNaN(parseInt(value)) ? ( this.alert_total_gam() )
-            : this.$store.dispatch("set_total_invest_gam",parseInt(value))
-        },
-        total_investment_game(value){
-            (value == "") ? this.total_investment_game = "" 
-            : isNaN(parseInt(value)) ? ( this.alert_total_game() )
-            : this.$store.dispatch("set_total_invest_game",parseInt(value))
-        }
+const total_investment_all = ref("")
+const total_investment_mom = ref("")
+const total_investment_goi = ref("")
+const total_investment_gam = ref("")
+const total_investment_game = ref("")
+
+const invalid_ratio_status = ref(false)
+
+function alert_invalid_ratio (all_,mom_,goi_,gam_,game_) {
+
+    const all = Number(all_)
+    const mom = Number(mom_)
+    const goi = Number(goi_)
+    const gam = Number(gam_)
+    const game = Number(game_)
+
+    const is_valid = ((all) == (mom + goi + gam + game))
+    if (is_valid) {
+        invalid_ratio_status.value = false
+        // alert(`${all} ${mom} ${goi} ${gam} ${game}`)
+        store.dispatch("set_total_investment",all)
+        store.dispatch("set_total_invest_mom",mom)
+        store.dispatch("set_total_invest_goi",goi)
+        store.dispatch("set_total_invest_gam",gam)
+        store.dispatch("set_total_invest_game",game)
+    } else {
+        invalid_ratio_status.value = true
+        // alert(`${all} ${mom} ${goi} ${gam} ${game}`)
+        total_investment_mom.value = ""
+        total_investment_goi.value = ""
+        total_investment_gam.value = ""
+        total_investment_game.value = ""
     }
+    
 }
 
-
-
-
+watch(() => {
+    if (total_investment_all.value != "" 
+    && total_investment_mom.value != ""
+    && total_investment_goi.value != ""
+    && total_investment_gam.value != ""
+    && total_investment_game.value != ""
+    ){
+        alert_invalid_ratio(total_investment_all.value,total_investment_mom.value,total_investment_goi.value,total_investment_gam.value,total_investment_game.value)
+    }
+})
 </script>
