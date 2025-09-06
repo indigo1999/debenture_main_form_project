@@ -37,9 +37,9 @@ const format = (date) => {
 <style>
 
 .dp__theme_light {
-    --dp-background-color: #d2fff7;
+    --dp-background-color: #fff !important;
     --dp-text-color: #212121;
-    --dp-hover-color: #f3f3f3;
+    --dp-hover-color: #f3f3f3 !important;
     --dp-hover-text-color: #212121;
     --dp-hover-icon-color: #959595;
     --dp-primary-color: #1976d2;
