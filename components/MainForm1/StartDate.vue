@@ -5,9 +5,13 @@
             <div>
                 <VueDatePicker 
                 class="dp__theme_light"
+                locale="th"
+                cancel-text="ยกเลิก"
+                select-text="ตกลง"
                 v-model="date"
                 :format="format"
                 month-name-format="long"
+                
                 ></VueDatePicker>
             </div>
         </div>

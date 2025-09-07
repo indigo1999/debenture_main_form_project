@@ -19,7 +19,12 @@
               </div>
               <div class="bg-info rounded-lg pa-3 mt-2">
                 <div>
+                <v-sheet
+                class=" align-center pa-5 mb-6"
+                :elevation="9"
+                rounded>
                   <MainForm2/>
+                </v-sheet>
                 </div>
               </div>
               <div class="bg-info rounded-lg pa-3 mt-2">

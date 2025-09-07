@@ -3,7 +3,7 @@
         <v-sheet
         class="d-flex justify-center align-center mb-6"
         :elevation="9"
-        rounded="">
+        rounded>
             <div class="bg-white rounded-lg pa-3">
                 <!-- <div class="d-flex justify-center">
                     <h2> {{ formattedTime }}</h2>
