@@ -68,13 +68,14 @@ const submit = () => {
     //console.log(JSON.stringify(debenture_paper_image.value))
 
     //WORK
-    // if (IS_THERE_ANY_EMPTY_VALUE_EXIST == true) {
-    //     alert("YOU ARE MISSING SOMETHING")
-    // } else {
-    //     alert("SUCCESS IN FILLING OUT FORM")
-    // }
+    if (IS_THERE_ANY_EMPTY_VALUE_EXIST == true) {
+        alert("YOU ARE MISSING SOMETHING")
+    } else {
+        alert("SUCCESS IN FILLING OUT FORM")
+    }
 
-    if (IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE) {
+    //WORK
+    if (IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE == true) {
         IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE()
         alert("SUCCESS IN COMPARISON OF INT FREQ & INT OUT DATE")
     } else {
@@ -82,17 +83,18 @@ const submit = () => {
     }
 
     //WORK
-    // if(IS_START_AND_END_DATE_SAME){
-    //     alert("START & END DATE CANNOT BE THE SAME")
-    // } else {
-    //     alert("SUCCESS IN COMPARISON OF START & END DATE")
-    // }
+    if(IS_START_AND_END_DATE_SAME){
+        alert("START & END DATE CANNOT BE THE SAME")
+    } else {
+        alert("SUCCESS IN COMPARISON OF START & END DATE")
+    }
 
-    // if(IS_DEBEN_IMAGE_FRONT_BACK_SAME){
-    //     alert("YOU NEED TO RECHECK AGAIN WITH THOSE INSERTED IMAGES")
-    // }else{
-    //     alert("SUCCESS IN INSERTION OF FRONT AND BACK IMAGES")
-    // }
+    //WORK
+    if(IS_DEBEN_IMAGE_FRONT_BACK_SAME){
+        alert("YOU NEED TO RECHECK AGAIN WITH THOSE INSERTED IMAGES")
+    }else{
+        alert("SUCCESS IN INSERTION OF FRONT AND BACK IMAGES")
+    }
 }
 
 const clear = () => {
@@ -123,8 +125,8 @@ const IS_VALID_INVESTMENT_RATIO = () => {
 }
 
 const IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE = () => {
-    alert(`${ parseInt(interest_freq.value) } == ${interest_out_date.value.length}`)
-    return ( parseInt(interest_freq.value) === parseInt(interest_out_date.value.length) ) 
+    alert(interest_freq.value.split(" ")[0])
+    return ( ( 12 / parseInt(interest_freq.value.split(" ")[0]) ) === parseInt(interest_out_date.value.length) ) 
 }
 
 const IS_START_AND_END_DATE_SAME = () => {
