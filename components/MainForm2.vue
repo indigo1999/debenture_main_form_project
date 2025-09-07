@@ -6,6 +6,7 @@
                 <VueDatePicker 
                 class="dp__theme_light"
                 locale="th"
+                @cleared="on_clear_date"
                 cancel-text="ยกเลิก"
                 select-text="ตกลง"
                 v-model="date"
@@ -29,21 +30,25 @@ const store = useStore();
 
 const date = ref();
 
-const format = (date) => {
-
-if (!date || date.length == 0) {
-    return "";
+const on_clear_date = () => {
+    store.dispatch("set_interest_out_date_array",[])
 }
 
-return date.map(date => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year_porsor = date.getFullYear() + 543;
-    const start_date_str = `${day}/${month}/${year_porsor}`
-    //   store.dispatch("set_start_date",start_date_str)
-    return start_date_str;
-}).join(" , ")
-  
+const format = (date) => {
+    if (!date || date.length == 0) {
+        return "";
+    }
+    const return_date = date.map(date => {
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1;
+                            const year_porsor = date.getFullYear() + 543;
+                            const date_str = `${day}/${month}/${year_porsor}`
+                            
+                            return date_str;
+                        }).join(",")
+
+    store.dispatch("set_interest_out_date_array",return_date.split(","))
+    return return_date
 }
 </script>
 

@@ -1,10 +1,8 @@
 import { createStore } from "vuex"
-import { validateDateFormat } from "../services/MainForm1/DurationConfig_service"
 
 const store = createStore({
     state() {
         return {
-            count : 0,
             debenture_name : "",
             duration_config : "",
             debenture_code : "",
@@ -26,15 +24,10 @@ const store = createStore({
                 front_base64 : "",
                 back_base64 : ""
             },
+            interest_out_date : []
         }
     },
     mutations : {
-        increment(state) {
-            state.count += 1;
-        },
-        decrement(state) {
-            state.count -= 1;
-        },
         set_debenture_name(state,debenture_name){
             state.debenture_name = debenture_name
             console.log("debenture name : "+state.debenture_name)
@@ -104,14 +97,11 @@ const store = createStore({
             state.debenture_paper_image.back_base64 = image_back_base64
             console.log("image back base64 : " + state.debenture_paper_image.back_base64)
         },
-        //validate later
-        validate_date_format(state){
-            let val_result = validateDateFormat(state.duration_config)
-            val_result = JSON.stringify(val_result)
-            val_result = JSON.parse(val_result)
-            alert(val_result)
-            return val_result.valid
+        set_interest_out_date(state, interest_out_date_array){
+            state.interest_out_date = interest_out_date_array
+            console.log(state.interest_out_date)
         }
+
     },
     actions : {
         set_debenture_name({ commit }, debenture_name) {
@@ -165,6 +155,9 @@ const store = createStore({
         set_debenture_paper_image_back({ commit }, back_base64) {
             commit("set_debenture_paper_image_back",back_base64)
         },
+        set_interest_out_date_array({ commit } , interest_out_date_array){
+            commit("set_interest_out_date",interest_out_date_array)
+        }
 
     },
     computed : {

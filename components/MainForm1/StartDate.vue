@@ -6,6 +6,7 @@
                 <VueDatePicker 
                 class="dp__theme_light"
                 locale="th"
+                @cleared="on_clear_date"
                 cancel-text="ยกเลิก"
                 select-text="ตกลง"
                 v-model="date"
@@ -27,6 +28,10 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const store = useStore();
 
 const date = ref(new Date());
+
+const on_clear_date = () => {
+    store.dispatch("set_interest_out_date_array",[])
+}
 
 const format = (date) => {
   const day = date.getDate();
