@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-      <div class="bg-surface-variant pa-4 position-relative rounded-lg ma-2">
+      <div class=" pa-4 position-relative rounded-lg ma-2">
         <div class="bg-surface-light position-relative py-3 ps-3">
           <div class="position-relative pe-3" style="max-height:max-content">
             <div>
@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import TestComponent from "./components/testComponent.vue"
 import Header_ from "./components/Header.vue"
 import MainForm1 from "./components/MainForm1/index.vue"
 import MainForm2 from "./components/MainForm2.vue"

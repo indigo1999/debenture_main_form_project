@@ -27,11 +27,15 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
 const store = useStore();
 
-const date = ref(new Date());
+const date = ref("");
 
 const on_clear_date = () => {
-    store.dispatch("set_interest_out_date_array",[])
+    store.dispatch("set_start_date","")
 }
+
+onMounted(() => {
+    store.dispatch("set_start_date","")
+})
 
 const format = (date) => {
   const day = date.getDate();

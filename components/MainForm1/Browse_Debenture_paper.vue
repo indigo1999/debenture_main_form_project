@@ -112,12 +112,30 @@
                 </div>
             </div>
         </v-sheet>
+        <v-overlay 
+        class="align-center justify-center" 
+        v-model="overlay_image_alert_status_same">
+            <div>
+                <v-card color="#EF5350" title="แจ้งเตือน">
+                    <v-card-text>
+                        <Browse_debenture_paper_alert/>
+                    </v-card-text>
+                </v-card>
+            </div>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                @click="overlay_image_alert_status_same = !overlay_image_alert_status_same">
+                    ปิดหน้าต่างนี้
+                </v-btn>
+            </div>
+        </v-overlay>
     </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
 import { useStore } from "vuex"
+import Browse_debenture_paper_alert from "./Browse_debenture_paper_alert/browse_image_alert.vue"
 
 const file_front = ref([])
 const file_back = ref([])
@@ -125,8 +143,27 @@ const image_url_front = ref("")
 const image_url_back = ref("")
 const show_file_front = ref(false)
 const show_file_back = ref(false)
+const overlay_image_alert_status_same = ref(false)
 
 const store = useStore()
+
+watchEffect(() => {
+    if ( image_url_front.value && image_url_back.value ) {
+        if(IS_FRONT_BACK_IMG_SAME()){
+            overlay_image_alert_status_same.value = true
+            file_front.value = []
+            image_url_front.value = ""
+            file_back.value = []
+            image_url_back.value = ""
+            show_file_front.value = false
+            show_file_back.value = false
+            store.dispatch("set_debenture_paper_image_front","")
+            store.dispatch("set_debenture_paper_image_back","")
+        } else {
+            alert("Correct Insertion don't forget to verify your images again")
+        }
+    }
+})
 
 const handle_front = async (event) => {
     const file = event.target.files[0]; // this is a real File object
@@ -176,5 +213,9 @@ function fileToBase64(file) {
     reader.onerror = reject;
     reader.readAsDataURL(file)// reads file as base64 encoded string
   });
+}
+
+function IS_FRONT_BACK_IMG_SAME () {
+    return ( image_url_front.value == image_url_back.value )
 }
 </script>
