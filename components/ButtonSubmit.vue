@@ -29,6 +29,9 @@
                         <div class="pa-6" v-if="START_AND_END_DATE_SAME">
                             <Start_End_date_same/>
                         </div>
+                        <div class="pa-6" v-if="START_AND_END_DATE_SAME == false && INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE == false && EMPTY_VALUE_EXIST == false">
+                            เรียบร้อย
+                        </div>
                     </v-card-text>
                 </v-card>
             </div>
@@ -75,6 +78,7 @@ const START_AND_END_DATE_SAME = ref(false)
 
 watchEffect(() => {
     debenture_name.value = computed( () => state.debenture_name ).value // string
+    console.log(debenture_name.value)
     duration_config.value = computed( () => state.duration_config ).value //
     debenture_code.value = computed( () => state.debenture_code ).value //
     start_date.value = computed( () => state.start_date ).value //
@@ -96,10 +100,12 @@ watchEffect(() => {
 function submit (){
     overlay_status.value = true
     //WORK --
-    if (IS_THERE_ANY_EMPTY_VALUE_EXIST() == true) {
+    if (IS_THERE_ANY_EMPTY_VALUE_EXIST()) {
         // alert("YOU ARE MISSING SOMETHING") 
         EMPTY_VALUE_EXIST.value = true
-    } 
+    } else {
+        alert("Form Filled Complete")
+    }
 
     // WORK --
     if (IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE() == false) {
@@ -122,22 +128,48 @@ function close_overlay () {
 }
 
 const clear = () => {
-
+    store.dispatch("set_debenture_name","")
+    store.dispatch("set_duration_config","")
+    store.dispatch("set_debenture_code","")
+    store.dispatch("set_start_date","")
+    store.dispatch("set_end_date","")
+    store.dispatch("set_interest_freq","")
+    store.dispatch("set_interest_percent","")
+    store.dispatch("set_detail_note","")
+    store.dispatch("set_total_investment",0)
+    store.dispatch("set_total_invest_mom",0)
+    store.dispatch("set_total_invest_goi",0)
+    store.dispatch("set_total_invest_gam",0)
+    store.dispatch("set_total_invest_game",0)
+    store.dispatch("set_agency_name","")
+    store.dispatch("set_registrar_name","")
+    store.dispatch("set_debenture_paper_image_front","")
+    store.dispatch("set_debenture_paper_image_back","")
+    store.dispatch("set_interest_out_date_array",[])
+    window.location.reload();
 }
 
 const IS_THERE_ANY_EMPTY_VALUE_EXIST = () => {
-    const debenture_image_front = JSON.stringify(debenture_paper_image.value).front_base64
-    const debenture_image_back = JSON.stringify(debenture_paper_image.value).back_base64
-    const interest_out_date_json_arr = JSON.stringify(interest_out_date.value)
+
+    let debenture_image_front = JSON.stringify(debenture_paper_image.value)
+    debenture_image_front = JSON.parse(debenture_image_front).front_base64
+
+    let debenture_image_back = JSON.stringify(debenture_paper_image.value)
+    debenture_image_back = JSON.parse(debenture_image_back).back_base64
+
+    let interest_out_date_json_arr = JSON.stringify(interest_out_date.value)
+    interest_out_date_json_arr = JSON.parse(interest_out_date_json_arr)
+
+
     const investment_group = JSON.stringify(investment.value)
 
-    if (debenture_name.value.length && duration_config.value.length && debenture_code.value.length
-        && start_date.value.length && end_date.value.length
-        && interest_freq.value.length && interest_percent.value.length && agency_name.value.length && registrar_name.value.length
-        && debenture_image_front && debenture_image_back
-        && interest_out_date_json_arr.length
-        && investment_group.total && investment_group.mom && investment_group.goi 
-        && investment_group.gam && investment_group.game 
+    if ( 
+        (debenture_name.value && duration_config.value && debenture_code.value)
+        && ( start_date.value && end_date.value )
+        && ( interest_freq.value && interest_percent.value) 
+        && ( agency_name.value && registrar_name.value )
+        && ( debenture_image_front && debenture_image_back )
+        && interest_out_date_json_arr
     ) {
         return false
     } else {
