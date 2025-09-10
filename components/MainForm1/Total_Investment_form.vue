@@ -11,6 +11,7 @@
                     hide-details="auto"
                     label="กรอกจำนวนเงินต้น"
                     clearable
+                    @input="on_input_total"
                 ></v-text-field>
             </div>
         </div>
@@ -28,6 +29,7 @@
                                 hide-details="auto"
                                 label="กรอกจำนวนเงินต้นของแม่"
                                 clearable
+                                @input="on_input_mom"
                             ></v-text-field>
                         </div>
                     </div>
@@ -44,6 +46,7 @@
                                 hide-details="auto"
                                 label="กรอกจำนวนเงินต้นของก้อย"
                                 clearable
+                                @input="on_input_goi"
                             ></v-text-field>
                         </div>
                     </div>
@@ -62,6 +65,7 @@
                                 hide-details="auto"
                                 label="กรอกจำนวนเงินต้นของแก้ม"
                                 clearable
+                                @input="on_input_gam"
                             ></v-text-field>
                         </div>
                     </div>
@@ -78,6 +82,7 @@
                                 hide-details="auto"
                                 label="กรอกจำนวนเงินต้นของเกม"
                                 clearable
+                                @input="on_input_game"
                             ></v-text-field>
                         </div>
                     </div>
@@ -110,6 +115,7 @@ import ALERT_WRONG_RATIO from "./Total_Investment_alerts/alert_wrong_ratio.vue"
 
 import { ref } from "vue"
 import { useStore } from "vuex"
+import { useDebounceFn } from "@vueuse/core"
 
 const store = useStore()
 
@@ -119,7 +125,34 @@ const total_investment_goi = ref("")
 const total_investment_gam = ref("")
 const total_investment_game = ref("")
 
+const total_investment_all_num = ref(0)
+const total_investment_mom_num = ref(0)
+const total_investment_goi_num = ref(0)
+const total_investment_gam_num = ref(0)
+const total_investment_game_num = ref(0)
+
 const invalid_ratio_status = ref(false)
+
+const on_input_total = useDebounceFn(() => {
+   total_investment_all_num.value = Number(total_investment_all.value)
+},40000)
+
+const on_input_mom = useDebounceFn(() => {
+   total_investment_mom_num.value = Number(total_investment_mom.value)
+},10000)
+
+const on_input_goi = useDebounceFn(() => {
+   total_investment_goi_num.value = Number(total_investment_goi.value)
+},10000)
+
+const on_input_gam = useDebounceFn(() => {
+   total_investment_gam_num.value = Number(total_investment_gam.value)
+},10000)
+
+const on_input_game = useDebounceFn(() => {
+   total_investment_game_num.value = Number(total_investment_game.value)
+},10000)
+
 
 function alert_invalid_ratio (all_,mom_,goi_,gam_,game_) {
 
@@ -150,13 +183,19 @@ function alert_invalid_ratio (all_,mom_,goi_,gam_,game_) {
 }
 
 watchEffect(() => {
-    if (total_investment_all.value != "" 
-    && total_investment_mom.value != ""
-    && total_investment_goi.value != ""
-    && total_investment_gam.value != ""
-    && total_investment_game.value != ""
+    console.log(`TOTAL : ${total_investment_all_num.value}`)
+    console.log(`MOM : ${total_investment_mom_num.value}`)
+    console.log(`GOI : ${total_investment_goi_num.value}`)
+    console.log(`GAM : ${total_investment_gam_num.value}`)
+    console.log(`GAME : ${total_investment_gam_num.value}`)
+    if (total_investment_all_num.value != 0
+    && 
+    ( total_investment_mom_num.value != 0
+    || total_investment_goi_num.value != 0
+    || total_investment_gam_num.value != 0
+    || total_investment_game_num.value != 0 )
     ){
-        alert_invalid_ratio(total_investment_all.value,total_investment_mom.value,total_investment_goi.value,total_investment_gam.value,total_investment_game.value)
+        alert_invalid_ratio(total_investment_all_num.value,total_investment_mom_num.value,total_investment_goi_num.value,total_investment_gam_num.value,total_investment_game_num.value)
     }
 })
 </script>
