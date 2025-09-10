@@ -50,7 +50,7 @@ const { handleSubmit , handleReset } = useForm({
                 const interest_freq = 12 / parseInt(value)
 
                 if(interest_freq == 12){
-                    store.dispatch("set_interest_freq"," 1 ปี")
+                    store.dispatch("set_interest_freq","1 ปี")
                 } else {
                     store.dispatch("set_interest_freq",`${interest_freq} เดือน`)
                 }

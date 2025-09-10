@@ -23,7 +23,7 @@
                         <div class="pa-6" v-if="EMPTY_VALUE_EXIST">
                             <Empty_value_exist/>
                         </div>
-                        <div class="pa-6" v-if="INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE">
+                        <div class="pa-6" v-if="INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE">
                             <Int_freq_Int_out_date/>
                         </div>
                         <div class="pa-6" v-if="START_AND_END_DATE_SAME">
@@ -33,7 +33,7 @@
                 </v-card>
             </div>
             <div class="d-flex justify-end">
-                <v-btn @click="overlay_status = false">ปิดหน้าต่างนี้</v-btn>
+                <v-btn @click="close_overlay">ปิดหน้าต่างนี้</v-btn>
             </div>
         </v-overlay>
 
@@ -70,7 +70,7 @@ const interest_out_date = ref("") // object
 
 const overlay_status = ref(false)
 const EMPTY_VALUE_EXIST = ref(false)
-const INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE = ref(false)
+const INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE = ref(false)
 const START_AND_END_DATE_SAME = ref(false)
 
 watchEffect(() => {
@@ -96,22 +96,29 @@ watchEffect(() => {
 function submit (){
     overlay_status.value = true
     //WORK --
-    if (IS_THERE_ANY_EMPTY_VALUE_EXIST()) {
+    if (IS_THERE_ANY_EMPTY_VALUE_EXIST() == true) {
         // alert("YOU ARE MISSING SOMETHING") 
         EMPTY_VALUE_EXIST.value = true
     } 
 
     // WORK --
     if (IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE() == false) {
-        INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE.value = true
+        INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE.value = true
     } 
 
     // //WORK --
     if(IS_START_AND_END_DATE_SAME()){
         // alert("START & END DATE CANNOT BE THE SAME")
         START_AND_END_DATE_SAME.value = true
-    } 
+    }
 
+}
+
+function close_overlay () {
+    overlay_status.value = false
+    EMPTY_VALUE_EXIST.value = false
+    INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE.value = false
+    START_AND_END_DATE_SAME.value = false
 }
 
 const clear = () => {
@@ -144,13 +151,21 @@ const IS_VALID_INVESTMENT_RATIO = () => {
 }
 
 const IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE = () => {
-    alert(interest_out_date.value.length)
-    return ( ( 12 / parseInt(interest_freq.value.split(" ")[0]) ) == parseInt(interest_out_date.value.length) ) 
+    const month_or_year = parseInt(interest_freq.value.split(" ")[0])
+    const int_out_length  = parseInt(interest_out_date.value.length)
+
+    if ( month_or_year == 1) {
+        return ( int_out_length == 1 )
+    } else {
+        return ( ( 12 / month_or_year ) == int_out_length )
+    }  
 }
 
 const IS_START_AND_END_DATE_SAME = () => {
     if (start_date.value.length != 0 && end_date.value.length != 0) {
-        return ( start_date.value == end_date.value )
+        if ( start_date.value == end_date.value ) {
+            return true
+        }
     } else if ( start_date.value.length == 0 && end_date.value.length == 0 ) {
         return false
     }
