@@ -66,6 +66,31 @@
                 </div>
             </div>
         </v-sheet>
+
+        <v-overlay
+            location-strategy="connected"
+            scroll-strategy="reposition"
+            v-model="INVALID_DATE_OVERLAY_STATUS"
+            class="justify-center position-sticky"
+            contained
+        >
+            <v-card color="#EF5350" title="แจ้งเตือน">
+                <v-card-text>
+                    <div>
+                        <Invalid_date_alert/>
+                    </div>
+                </v-card-text>
+            </v-card>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                    color="red"
+                    @click="close_invalid_date_overlay()"
+                >
+                    ปิดการแจ้งเตือน
+                </v-btn>   
+            </div>
+        </v-overlay>
+
     </div>
 </template>
 
@@ -73,23 +98,35 @@
 import { ref,onMounted } from "vue"
 import { useStore } from "vuex"
 import { useField, useForm } from 'vee-validate'
+import Invalid_date_alert from "./DurationConfig_alert/Invalid_date_alert.vue"
 import { validateDateFormat } from "../../services/MainForm1/DurationConfig_service"
 
 const store = useStore();
 
+const INVALID_DATE_OVERLAY_STATUS = ref(false)
 const initial_date = ref({ year: "", month: "", day: "" })
 
+const close_invalid_date_overlay = () => {
+    select_day.value.value = ""
+    select_month.value.value = ""
+    select_year.value.value = ""
+    store.dispatch("set_duration_config","")
+    INVALID_DATE_OVERLAY_STATUS.value = false
+}
 
 watchEffect(() => {
-    const valid_date_object = validateDateFormat(initial_date.value)
-    const is_valid_date = valid_date_object.valid
-    const day = valid_date_object.days
-    const month = valid_date_object.months
-    const year = valid_date_object.years
 
-    const duration = `${year} ปี ${month} เดือน  ${day} วัน`    
-    is_valid_date ? store.dispatch("set_duration_config",duration)
-    : console.log("INVALID DATE")
+    if (initial_date.value.year.length > 0 && initial_date.value.month.length > 0 && initial_date.value.day.length > 0) {
+        const valid_date_object = validateDateFormat(initial_date.value)
+        const is_valid_date = valid_date_object.valid
+        const day = valid_date_object.days
+        const month = valid_date_object.months
+        const year = valid_date_object.years
+
+        const duration = `${year} ปี ${month} เดือน  ${day} วัน`    
+        is_valid_date ? store.dispatch("set_duration_config",duration)
+        : INVALID_DATE_OVERLAY_STATUS.value = true
+    } 
     
 })
 

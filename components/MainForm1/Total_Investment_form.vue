@@ -12,6 +12,7 @@
                     label="กรอกจำนวนเงินต้น"
                     clearable
                     @input="on_input_total"
+                    @click:clear="on_clear_total"
                 ></v-text-field>
             </div>
         </div>
@@ -30,6 +31,7 @@
                                 label="กรอกจำนวนเงินต้นของแม่"
                                 clearable
                                 @input="on_input_mom"
+                                @click:clear="on_clear_mom"
                             ></v-text-field>
                         </div>
                     </div>
@@ -47,6 +49,7 @@
                                 label="กรอกจำนวนเงินต้นของก้อย"
                                 clearable
                                 @input="on_input_goi"
+                                @click:clear="on_clear_goi"
                             ></v-text-field>
                         </div>
                     </div>
@@ -66,6 +69,7 @@
                                 label="กรอกจำนวนเงินต้นของแก้ม"
                                 clearable
                                 @input="on_input_gam"
+                                @click:clear="on_clear_gam"
                             ></v-text-field>
                         </div>
                     </div>
@@ -83,6 +87,7 @@
                                 label="กรอกจำนวนเงินต้นของเกม"
                                 clearable
                                 @input="on_input_game"
+                                @click:clear="on_clear_game"
                             ></v-text-field>
                         </div>
                     </div>
@@ -95,9 +100,13 @@
           class="align-center justify-center"
           contained
         >
-            <div>
-                <ALERT_WRONG_RATIO/>
-            </div>
+            <v-card color="#EF5350" title="แจ้งเตือน">
+                <v-card-text>
+                    <div>
+                        <ALERT_WRONG_RATIO/>
+                    </div>
+                </v-card-text>
+            </v-card>
             <div class="d-flex justify-end ma-1 mt-2">
                 <v-btn
                     color="red"
@@ -135,23 +144,45 @@ const invalid_ratio_status = ref(false)
 
 const on_input_total = useDebounceFn(() => {
    total_investment_all_num.value = Number(total_investment_all.value)
-},40000)
+},25000)
 
 const on_input_mom = useDebounceFn(() => {
    total_investment_mom_num.value = Number(total_investment_mom.value)
-},10000)
+},9000)
 
 const on_input_goi = useDebounceFn(() => {
    total_investment_goi_num.value = Number(total_investment_goi.value)
-},10000)
+},9000)
 
 const on_input_gam = useDebounceFn(() => {
    total_investment_gam_num.value = Number(total_investment_gam.value)
-},10000)
+},9000)
 
 const on_input_game = useDebounceFn(() => {
    total_investment_game_num.value = Number(total_investment_game.value)
-},10000)
+},9000)
+
+
+
+const on_clear_total = () => {
+    store.dispatch("set_total_investment",0)
+}
+
+const on_clear_mom = () => {
+    store.dispatch("set_total_invest_mom",0)
+}
+
+const on_clear_goi = () => {
+    store.dispatch("set_total_invest_goi",0)
+}
+
+const on_clear_gam = () => {
+    store.dispatch("set_total_invest_gam",0)
+}
+
+const on_clear_game = () => {
+    store.dispatch("set_total_invest_game",0)
+}
 
 
 function alert_invalid_ratio (all_,mom_,goi_,gam_,game_) {

@@ -13,6 +13,8 @@
                             v-model="agency_name.value.value"
                             :error-messages="agency_name.errorMessage.value"
                             label="ชื่อผู้แทนจัดจำหน่าย"
+                            clearable
+                            @click:clear="on_clear"
                         ></v-text-field>
                     </form>
                 </div>
@@ -26,6 +28,10 @@ import { useStore } from "vuex"
 import { useField, useForm } from "vee-validate"
 
 const store = useStore()
+
+const on_clear = () => {
+    store.dispatch("set_agency_name","")
+}
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema : {

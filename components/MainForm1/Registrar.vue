@@ -13,6 +13,8 @@
                             v-model="registrar_name.value.value"
                             :error-messages="registrar_name.errorMessage.value"
                             label="นายทะเบียน"
+                            clearable
+                            @click:clear="on_clear"
                         ></v-text-field>
                     </form>
                 </div>
@@ -26,6 +28,10 @@ import { useStore } from "vuex"
 import { useField, useForm } from "vee-validate"
 
 const store = useStore()
+
+const on_clear = () => {
+    store.dispatch("set_registrar_name","")
+}
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema : {

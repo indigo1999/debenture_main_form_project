@@ -14,6 +14,7 @@
                             :error-messages="name.errorMessage.value"
                             label="ชื่อหุ้นกู้"
                             clearable
+                            @click:clear="on_clear"
                         ></v-text-field>
                     </form>
                 </div>
@@ -31,6 +32,10 @@ const store = useStore()
 onUpdated(() => {
     name.value.value = store.state.debenture_name
 })
+
+const on_clear = () => {
+    store.dispatch("set_debenture_name","");
+}
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema : {

@@ -15,6 +15,51 @@
                 ></VueDatePicker>
             </div>
         </div>
+        <v-overlay
+          v-model="INVALID_DATE_OVERLAY_STATUS"
+          :absolute="true"
+          class="d-flex justify-center position-sticky"
+          contained
+        >
+            <v-card color="#EF5350" title="แจ้งเตือน">
+                <v-card-text>
+                    <div>
+                        <Invalid_end_date/>
+                    </div>
+                </v-card-text>
+            </v-card>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                    color="red"
+                    @click="close_invalid_date_overlay"
+                >
+                    ปิดการแจ้งเตือน
+                </v-btn>
+            </div>
+        </v-overlay>
+
+        <v-overlay
+          v-model="INVALID_START_END_DATE_OVERLAY_STATUS"
+          :absolute="true"
+          class="d-flex justify-center position-sticky"
+          contained
+        >
+            <v-card color="#EF5350" title="แจ้งเตือน">
+                <v-card-text>
+                    <div>
+                        <Invalid_end_date/>
+                    </div>
+                </v-card-text>
+            </v-card>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                    color="red"
+                    @click="close_invalid_start_end_date_overlay"
+                >
+                    ปิดการแจ้งเตือน
+                </v-btn>
+            </div>
+        </v-overlay>
     </div>
 </template>
 
@@ -22,11 +67,31 @@
 import { ref } from "vue"
 import { useStore } from "vuex"
 import VueDatePicker from "@vuepic/vue-datepicker"
+import Invalid_end_date from "./End_date_alert/Invalid_end_date.vue"
+import Invalid_start_and_end_date from "./End_date_alert/Invalid_start_and_end_date.vue"
 import '@vuepic/vue-datepicker/dist/main.css'
 
 const store = useStore();
+const state = store.state
 
 const date = ref("");
+const INVALID_DATE_OVERLAY_STATUS = ref(false) 
+const INVALID_START_END_DATE_OVERLAY_STATUS = ref(false)
+const start_date = ref("")
+const end_date = ref("")
+
+const close_invalid_date_overlay = () => {
+    INVALID_DATE_OVERLAY_STATUS.value = false
+    date.value = ""
+    store.dispatch("set_end_date","")
+}
+
+const close_invalid_start_end_date_overlay = () => {
+    INVALID_START_END_DATE_OVERLAY_STATUS.value = false
+    date.value = ""
+    store.dispatch("set_start_date","")
+    store.dispatch("set_end_date","")
+}
 
 const on_clear_date = () => {
     store.dispatch("set_end_date","")
@@ -36,13 +101,80 @@ onMounted(() => {
     store.dispatch("set_end_date","")
 })
 
+watch(() => {
+    start_date.value = computed( () => state.start_date ).value //
+    end_date.value = computed( () => state.end_date).value //
+
+    if (start_date.value.length > 0 && end_date.value.length > 0) {
+
+        const start_date_arr = start_date.value.split("/")
+        const start_day = Number(start_date_arr[0])
+        const start_month = Number(start_date_arr[1])
+        const start_year = Number(start_date_arr[2])
+
+        const end_date_arr = end_date.value.split("/")
+        const end_day = Number(end_date_arr[0])
+        const end_month = Number(end_date_arr[1])
+        const end_year = Number(end_date_arr[2])
+
+        if (start_day && end_day) {
+            // year_end >= year_start
+            if (end_year - start_year > 0) {
+                //VALID YEAR-DURATION
+                // month_end >= month_start
+                if(end_month - start_month >= 0) {
+                    //VALID MONTH-DURATION
+                    // day_end >= day_start
+                    if(end_day - start_day >= 0) {
+                        //VALID DAY-DURATION
+                        return;
+                    } else {
+                        //INVALID DAY-DURATION
+                        INVALID_START_END_DATE_OVERLAY_STATUS.value = true
+                    }
+                } else {
+                    //INVALID MONTH-DURATION
+                    INVALID_START_END_DATE_OVERLAY_STATUS.value = true
+                }
+            } else {
+                //INVALID YEAR-DURATION
+                INVALID_START_END_DATE_OVERLAY_STATUS.value = true
+            }
+        }
+
+    }
+
+
+})
+
 const format = (date) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year_porsor = date.getFullYear() + 543;
-  const start_end_str = `${day}/${month}/${year_porsor}`
-  store.dispatch("set_end_date",start_end_str)
-  return start_end_str;
+
+  const day_now = new Date().getDate();
+  const month_now = new Date().getMonth() + 1;
+  const year_now = new Date().getFullYear()
+
+  if ( date.getFullYear() - year_now >= 0) {
+        if ( month - month_now >= 0) {
+                if (day - day_now >= 0) {
+                    console.log("VALID DATE")
+                    const end_date_str = `${day}/${month}/${year_porsor}`
+                    store.dispatch("set_end_date",end_date_str)
+                    return end_date_str;
+                } else {
+                    INVALID_DATE_OVERLAY_STATUS.value = true
+                    // console.log("day must not be in the past from the current" + (day - day_now))
+                }
+        } else {
+            INVALID_DATE_OVERLAY_STATUS.value = true
+            // console.log("Month must not be in the past from the current" + ( month - month_now ))
+        }
+  } else {
+    INVALID_DATE_OVERLAY_STATUS.value = true
+    // console.log("Year must not be in the past from the current" + year_now)
+  }
 }
 </script>
 

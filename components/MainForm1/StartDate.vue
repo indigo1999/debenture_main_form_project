@@ -12,22 +12,54 @@
                 v-model="date"
                 :format="format"
                 month-name-format="long"
-                
                 ></VueDatePicker>
             </div>
         </div>
+
+        <v-overlay
+          v-model="INVALID_DATE_OVERLAY_STATUS"
+          :absolute="true"
+          class="d-flex justify-center position-sticky"
+          contained
+        >
+            <v-card color="#EF5350" title="แจ้งเตือน">
+                <v-card-text>
+                    <div>
+                        <Invalid_start_date/>
+                    </div>
+                </v-card-text>
+            </v-card>
+            <div class="d-flex justify-end ma-1 mt-2">
+                <v-btn
+                    color="red"
+                    @click="close_overlay"
+                >
+                    ปิดการแจ้งเตือน
+                </v-btn>
+            </div>
+        </v-overlay>
     </div>
+
+    
 </template>
 
 <script setup>
 import { ref } from "vue"
 import { useStore } from "vuex"
 import VueDatePicker from "@vuepic/vue-datepicker"
+import Invalid_start_date from "./Start_date_alert/Invalid_start_date.vue"
 import '@vuepic/vue-datepicker/dist/main.css'
 
 const store = useStore();
 
 const date = ref("");
+const INVALID_DATE_OVERLAY_STATUS = ref(false) 
+
+const close_overlay = () => {
+    INVALID_DATE_OVERLAY_STATUS.value = false
+    date.value = ""
+    store.dispatch("set_start_date","")
+}
 
 const on_clear_date = () => {
     store.dispatch("set_start_date","")
@@ -41,9 +73,31 @@ const format = (date) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year_porsor = date.getFullYear() + 543;
-  const start_date_str = `${day}/${month}/${year_porsor}`
-  store.dispatch("set_start_date",start_date_str)
-  return start_date_str;
+
+
+  const day_now = new Date().getDate();
+  const month_now = new Date().getMonth() + 1;
+  const year_now = new Date().getFullYear()
+
+  if ( date.getFullYear() - year_now >= 0) {
+        if ( month - month_now >= 0) {
+                if (day - day_now >= 0) {
+                    console.log("VALID DATE")
+                    const start_date_str = `${day}/${month}/${year_porsor}`
+                    store.dispatch("set_start_date",start_date_str)
+                    return start_date_str;
+                } else {
+                    INVALID_DATE_OVERLAY_STATUS.value = true
+                    // console.log("day must not be in the past from the current" + (day - day_now))
+                }
+        } else {
+            INVALID_DATE_OVERLAY_STATUS.value = true
+            // console.log("Month must not be in the past from the current" + ( month - month_now ))
+        }
+  } else {
+    INVALID_DATE_OVERLAY_STATUS.value = true
+    // console.log("Year must not be in the past from the current" + year_now)
+  }
 }
 </script>
 

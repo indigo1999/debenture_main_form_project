@@ -13,6 +13,8 @@
                             v-model="debenture_code.value.value"
                             :error-messages="debenture_code.errorMessage.value"
                             label="รหัสหุ้นกู้"
+                            clearable
+                            @click:clear="on_clear"
                         ></v-text-field>
                     </form>
                 </div>
@@ -26,6 +28,10 @@ import { useStore } from "vuex"
 import { useField, useForm } from "vee-validate"
 
 const store = useStore()
+
+const on_clear = () => {
+    store.dispatch("set_debenture_code","");
+}
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema : {

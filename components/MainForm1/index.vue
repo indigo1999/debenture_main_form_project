@@ -1,5 +1,5 @@
 <template>
-    <div>
+    
         <div>
             <div>
                 <div class="pa-3 mt-2 d-flex justify-center">
@@ -79,8 +79,7 @@
                 </div>
             </div>
         </div>
-
-    </div>
+    
 
 </template>
 
