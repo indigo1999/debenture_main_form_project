@@ -89,7 +89,6 @@ const close_invalid_date_overlay = () => {
 const close_invalid_start_end_date_overlay = () => {
     INVALID_START_END_DATE_OVERLAY_STATUS.value = false
     date.value = ""
-    store.dispatch("set_start_date","")
     store.dispatch("set_end_date","")
 }
 

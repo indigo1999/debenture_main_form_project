@@ -69,6 +69,7 @@ onMounted(() => {
     store.dispatch("set_start_date","")
 })
 
+
 const format = (date) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;

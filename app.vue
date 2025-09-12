@@ -30,7 +30,7 @@
                   {{ this.$store.state.count }}
                 </div>
               </div> -->
-              <div class="bg-info rounded-lg pa-3 mt-2">
+              <div class="pa-3 mt-2">
                 <div>
                   <ButtonSubmit/>
                 </div>

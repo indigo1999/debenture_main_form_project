@@ -2,14 +2,14 @@
     <div>
         <div>
             <v-row>
-                <v-col class="bg-red d-flex justify-center" cols="3">
-                    <v-btn rounded="lg" size="x-large" @click="clear" >CLEAR</v-btn>
+                <v-col class="d-flex justify-center" cols="3">
+                    <v-btn color="#E53935" rounded="lg" size="x-large" @click="clear" >CLEAR</v-btn>
                 </v-col>
-                <v-col class="bg-green" cols="6">
+                <v-col class="" cols="6">
 
                 </v-col>
-                <v-col class="bg-red d-flex justify-center" cols="3">
-                    <v-btn rounded="lg" size="x-large" @click="submit" >SUBMIT</v-btn>
+                <v-col class="d-flex justify-center" cols="3">
+                    <v-btn color="#64FFDA" rounded="lg" size="x-large" @click="submit" >SUBMIT</v-btn>
                 </v-col>
             </v-row>  
         </div>
