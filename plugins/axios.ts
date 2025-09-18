@@ -7,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const defaultUrl = `${HOST}:${PORT}`
 
     const axios_api = axios.create({
-        baseURL : defaultUrl,
+        baseURL : defaultUrl ,
         headers : {
             common : {
                 'Content-Type' : 'application/json'
@@ -16,7 +16,11 @@ export default defineNuxtPlugin((nuxtApp) => {
         },
     });
 
-    nuxtApp.provide('axios',axios_api)
+    return {
+        provide : {
+           axios_api
+        }
+    }
 
     // return {
     //     provide : {

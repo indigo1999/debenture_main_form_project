@@ -167,12 +167,13 @@ watchEffect(() => {
 
 const handle_front = async (event) => {
     const file = event.target.files[0]; // this is a real File object
+    console.log(event.target.size)
     const base64 = await fileToBase64(file);
     image_url_front.value = base64
     const base64_string_front = base64.split(",")[1]
     //console.log(base64_string_front)
     show_file_front.value = true
-    store.dispatch("set_debenture_paper_image_front",base64_string_front)
+    store.dispatch("set_debenture_paper_image_front",file)
     // this.$store.commit("setFileBase64", base64);
 }
 
@@ -186,12 +187,13 @@ const handle_clear_front = () => {
 
 const handle_back = async (event) => {
     const file = event.target.files[0]; // this is a real File object
+    console.log(event.target.size)
     const base64 = await fileToBase64(file);
     image_url_back.value = base64
     const base64_string_back = base64.split(",")[1]
     //console.log(base64_string_back)
     show_file_back.value = true
-    store.dispatch("set_debenture_paper_image_back",base64_string_back)
+    store.dispatch("set_debenture_paper_image_back",file)
     // this.$store.commit("setFileBase64", base64);
 }
 
