@@ -100,7 +100,7 @@ onMounted(() => {
     store.dispatch("set_end_date","")
 })
 
-watch(() => {
+watchEffect(() => {
     start_date.value = computed( () => state.start_date ).value //
     end_date.value = computed( () => state.end_date).value //
 

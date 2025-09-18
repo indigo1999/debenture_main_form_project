@@ -157,6 +157,22 @@ const store = createStore({
         },
         set_interest_out_date_array({ commit } , interest_out_date_array){
             commit("set_interest_out_date",interest_out_date_array)
+        },
+        send_data : async (data) => {
+            const { $axios } = useNuxtApp()
+             try {
+                const HOST = '127.0.0.1'//config.private.API_HOST
+                const PORT = 3142
+                const PATH = 'api'
+                const END_POINT = 'append_sheet'
+                const URL = `/${PATH}/${END_POINT}`
+
+                const response = await $axios.post(URL,data);
+                console.log(response.status+" "+response.statusText+" "+response.data)
+                
+            } catch (error) {
+                console.log(error)
+            }
         }
 
     },

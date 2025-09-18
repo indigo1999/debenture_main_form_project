@@ -22,8 +22,20 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxt/fonts',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
   ],
+
+  runtimeConfig : {
+    public : {
+
+    },
+    private : {
+      // API_HOST : process.env.API_HOST,
+      // API_PORT : process.env.API_PORT,
+      // API_PATH : process.env.API_PATH,
+      // API_ENDPOINT : process.env.API_ENDPOINT
+    },
+  },
 
   vite : {
     vue : {

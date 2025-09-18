@@ -46,10 +46,12 @@
 <script setup>
 import { ref , computed } from "vue"
 import { useStore } from "vuex"
+
 import Empty_value_exist from "./MainForm1/Submit_alert/Empty_value_exist.vue"
 import Int_freq_Int_out_date from "./MainForm1/Submit_alert/Int_freq_Int_out_date.vue"
 import Start_End_date_same from "./MainForm1/Submit_alert/Start_End_date_same.vue"
 
+const { $axios } = useNuxtApp()
 const store = useStore()
 
 const state = store.state
@@ -76,6 +78,53 @@ const EMPTY_VALUE_EXIST = ref(false)
 const INT_FREQ_UNEQUAL_LENGTH_INT_OUT_DATE = ref(false)
 const START_AND_END_DATE_SAME = ref(false)
 
+const investment_group = JSON.stringify(investment.value)
+
+
+
+const debenture_image_front = () => {
+    let debenture_image_front_value = JSON.stringify(debenture_paper_image.value)
+    let debenture_image_front_base64 = JSON.parse(debenture_image_front_value).front_base64
+    return debenture_image_front_base64
+}
+
+const debenture_image_back = () => {
+    let debenture_image_back_value = JSON.stringify(debenture_paper_image.value)
+    let debenture_image_back_base64 = JSON.parse(debenture_image_back_value).front_base64
+    return debenture_image_back_base64
+}
+
+const interest_out_date_json_arr = () => {
+    let interest_out_date_json_arr = JSON.stringify(interest_out_date.value)
+    let interest_out_date_json_arr_parse = JSON.parse(interest_out_date_json_arr)
+    return interest_out_date_json_arr_parse
+}
+
+// let data = {
+//             debenture_name : debenture_name.value,
+//             duration_config : duration_config.value,
+//             debenture_code : debenture_code.value,
+//             start_date : start_date.value,
+//             end_date : end_date.value,
+//             interest_freq : interest_freq.value,
+//             interest_percent : interest_percent.value,
+//             detail_note : detail_note.value,
+//             investment : {
+//                 total : investment_group.total,
+//                 mom : investment_group.mom,
+//                 goi : investment_group.goi,
+//                 gam : investment_group.gam,
+//                 game : investment_group.game
+//             },
+//             agency_name : agency_name.value,
+//             registrar_name : registrar_name.value,
+//             debenture_paper_image : {
+//                 front_base64 : debenture_image_front(),
+//                 back_base64 : debenture_image_back()
+//             },
+//             interest_out_date : interest_out_date_json_arr
+// } 
+
 watchEffect(() => {
     debenture_name.value = computed( () => state.debenture_name ).value // string
     console.log(debenture_name.value)
@@ -99,13 +148,6 @@ watchEffect(() => {
 
 function submit (){
     overlay_status.value = true
-    //WORK --
-    if (IS_THERE_ANY_EMPTY_VALUE_EXIST()) {
-        // alert("YOU ARE MISSING SOMETHING") 
-        EMPTY_VALUE_EXIST.value = true
-    } else {
-        alert("Form Filled Complete")
-    }
 
     // WORK --
     if (IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE() == false) {
@@ -118,6 +160,46 @@ function submit (){
         START_AND_END_DATE_SAME.value = true
     }
 
+    //WORK --
+    if (IS_THERE_ANY_EMPTY_VALUE_EXIST()) {
+        // alert("YOU ARE MISSING SOMETHING") 
+        EMPTY_VALUE_EXIST.value = true
+    } else {
+        // alert("Form Filled Complete")
+        SEND_OUT_DATA();
+    }
+
+}
+
+async function SEND_OUT_DATA () {
+    const data = {
+        "Timestamp": "2025-07-04",
+        "Debenture Name": "Debenture Test Name",
+        "Debenture Duration": "2 ปี",
+        "Debenture Code": "Debenture Test Code 0000001",
+        "Start Date": "12/06/68",
+        "End Date": "12/06/70",
+        "Interest Payment Frequency": "3 เดือน",
+        "Interest Rate (%)": "0.06",
+        "Total Investment (THB)": 400000,
+        "Mother's Investment (THB)": 100000,
+        "Goi's Investment (THB)": 100000,
+        "Gam's Investment (THB)": 100000,
+        "Game's Investment (THB)": 100000,
+        "Underwriter": "KTX",
+        "Mar Payment Date": 12,
+        "Jun Payment Date": 12,
+        "Sep Payment Date": 12,
+        "Dec Payment Date": 12
+    }
+
+    const config = useRuntimeConfig();
+
+    try {
+        store.dispatch("send_data",data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 function close_overlay () {
@@ -151,28 +233,18 @@ const clear = () => {
 
 const IS_THERE_ANY_EMPTY_VALUE_EXIST = () => {
 
-    let debenture_image_front = JSON.stringify(debenture_paper_image.value)
-    debenture_image_front = JSON.parse(debenture_image_front).front_base64
-
-    let debenture_image_back = JSON.stringify(debenture_paper_image.value)
-    debenture_image_back = JSON.parse(debenture_image_back).back_base64
-
-    let interest_out_date_json_arr = JSON.stringify(interest_out_date.value)
-    interest_out_date_json_arr = JSON.parse(interest_out_date_json_arr)
-
-
-    const investment_group = JSON.stringify(investment.value)
-
     if ( 
         (debenture_name.value && duration_config.value && debenture_code.value)
         && ( start_date.value && end_date.value )
         && ( interest_freq.value && interest_percent.value) 
         && ( agency_name.value && registrar_name.value )
-        && ( debenture_image_front && debenture_image_back )
-        && interest_out_date_json_arr
+        && ( debenture_image_front() && debenture_image_back() )
+        && interest_out_date_json_arr()
     ) {
         return false
     } else {
+        console.log(debenture_image_front())
+
         return true
     }
 } 

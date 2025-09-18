@@ -107,9 +107,9 @@ const INVALID_DATE_OVERLAY_STATUS = ref(false)
 const initial_date = ref({ year: "", month: "", day: "" })
 
 const close_invalid_date_overlay = () => {
-    select_day.value.value = ""
-    select_month.value.value = ""
-    select_year.value.value = ""
+    select_day.value.value = "0"
+    select_month.value.value = "0"
+    select_year.value.value = "0"
     store.dispatch("set_duration_config","")
     INVALID_DATE_OVERLAY_STATUS.value = false
 }
