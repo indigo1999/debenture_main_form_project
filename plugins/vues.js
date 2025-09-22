@@ -166,6 +166,7 @@ const store = createStore({
                 const PATH = 'api'
                 const END_POINT = 'append_sheet'
                 const URL = `http://${HOST}:${PORT}/${PATH}/${END_POINT}`
+                // const header = { "Content-Type": "multipart/form-data" }
 
                 const response = await axios.post(URL,data);
                 console.log(response.status+" "+response.statusText+" "+response.data)
