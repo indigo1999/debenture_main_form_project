@@ -161,7 +161,7 @@ async function SEND_OUT_DATA (deben_img_front,deben_img_back,int_out_date_arr,in
     form_data.append("Start Date",start_date.value)
     form_data.append("End Date",end_date.value)
     form_data.append("Interest Payment Frequency",interest_freq.value)
-    form_data.append("Interest Rate (%)",interest_percent.value)
+    form_data.append("Interest Rate (%)",Number(interest_percent.value))
     form_data.append("Notes",detail_note.value)
     form_data.append("Total Investment (THB)",Number(inv_grp.total))
     form_data.append("Mother's Investment (THB)",Number(inv_grp.mom))
