@@ -172,6 +172,7 @@ async function SEND_OUT_DATA (deben_img_front,deben_img_back,int_out_date_arr,in
     form_data.append("Registrar",registrar_name.value)
     form_data.append("Contract Front Image",deben_img_front)
     form_data.append("Contract Back Image",deben_img_back)
+
     form_data.append("interest_out_date",int_out_date_arr)
 
     
@@ -283,7 +284,7 @@ const IS_VALID_INVESTMENT_RATIO = () => {
 
 const IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE = () => {
     const month_or_year = parseInt(interest_freq.value.split(" ")[0])
-    const int_out_length  = parseInt(interest_out_date.value.length)
+    const int_out_length  = parseInt(interest_out_date.value[0].length)
 
     if ( month_or_year == 1) {
         return ( int_out_length == 1 )

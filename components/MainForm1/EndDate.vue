@@ -118,13 +118,13 @@ watchEffect(() => {
 
         if (start_day && end_day) {
             // year_end >= year_start
-            if (end_year - start_year > 0) {
+            if (end_year - start_year >= 0) {
                 //VALID YEAR-DURATION
                 // month_end >= month_start
                 if(end_month - start_month >= 0) {
                     //VALID MONTH-DURATION
                     // day_end >= day_start
-                    if(end_day - start_day >= 0) {
+                    if(end_day - start_day > 0) {
                         //VALID DAY-DURATION
                         return;
                     } else {
