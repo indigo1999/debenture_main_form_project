@@ -3,122 +3,28 @@
         <div class="bg-white rounded-lg pa-1 mt-1">
             <div class="">
                 <h2>เลือกวันที่มีการชำระดอก</h2>
-                <div>
-                    <!-- <VueDatePicker 
-                    class="dp__theme_light"
-                    locale="th"
-                    @cleared="on_clear_date"
-                    cancel-text="ยกเลิก"
-                    select-text="ตกลง"
-                    v-model="date"
-                    :format="format"
-                    :enable-time-picker="false"
-                    month-name-format="long"
-                    multi-dates
-                    ></VueDatePicker> -->
-                    <v-select 
-                        label="เลือกวันที่"
-                        :items="day_item"
-                        v-model="chosen_day">
-                    </v-select>
+                <div class="bg-indigo-accent-4">
+                    <div>
+                        <v-container fluid>
+                            <p>Selected Button: {{ payment_choice_radio }}</p>
+                            <v-radio-group v-model="payment_choice_radio">
+                                <v-radio label="จ่ายตามวันที่ปกติ" value="normal"></v-radio>
+                                <v-radio label="จ่ายเฉพาะวันสุดท้ายของเดือน" value="abnormal"></v-radio>
+                            </v-radio-group>
+                        </v-container>
+                    </div>
                 </div>
-            </div>
-            <div class="">
-                <h2>เลือกเดือนที่ทีการชำระดอก</h2>
-                <div>
-                    <v-container fluid>
-                        <v-row>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="มกราคม"
-                                    style=""
-                                    value="Jan Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="กุมภาพันธ์"
-                                    value="Feb Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="มีนาคม"
-                                    value="Mar Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="เมษายน"
-                                    value="Apr Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                        </v-row>
-                        <v-row>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="พฤษภาคม"
-                                    value="May Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="มิถุนายน"
-                                    value="Jun Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="กรกฎาคม"
-                                    value="Jul Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="สิงหาคม"
-                                    value="Aug Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                        </v-row>
-                        <v-row>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="กันยายน"
-                                    value="Sep Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="ตุลาคม"
-                                    value="Oct Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="พฤศจิกายน"
-                                    value="Nov Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                            <v-col>
-                                <v-checkbox
-                                    v-model="chosen_months"
-                                    label="ธันวาคม"
-                                    value="Dec Payment Date"
-                                ></v-checkbox>
-                            </v-col>
-                        </v-row>
-                    </v-container>
+                <div class="bg-blue">
+                    <div v-if="payment_choice_radio == 'normal'">
+                        <v-card>
+                            <Normal_Payment/>
+                        </v-card>
+                    </div>
+                    <div v-if="payment_choice_radio == 'abnormal'">
+                        <v-card>
+                            <Abnormal_Payment/>
+                        </v-card>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,8 +34,15 @@
 <script setup>
 import { ref } from "vue"
 import { useStore } from "vuex"
-// import VueDatePicker from "@vuepic/vue-datepicker"
-// import '@vuepic/vue-datepicker/dist/main.css'
+
+import Normal_Payment from "../components/MainForm2/Normal_Payment.vue"
+import Abnormal_Payment from "../components/MainForm2/Abnormal_Payment.vue"
+
+const payment_choice_radio = ref("normal")
+
+
+
+
 const chosen_day = ref(null)
 const day_item = ['1','2','3','4','5','6','7','8','9','10',
     '11','12','13','14','15','16','17','18','19','20',
