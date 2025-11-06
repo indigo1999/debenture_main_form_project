@@ -7,7 +7,6 @@
                             เลือกเดือน
                         </div>
                         <div>
-                            {{ month_model }}
                             <v-select
                                 v-model="month_model"
                                 label="เลือกเดือนที่จ่ายดอก"
@@ -22,7 +21,6 @@
                             เลือกวัน
                         </div>
                         <div>
-                            {{ day_model }}
                             <v-select
                                 v-model="day_model"
                                 label="เลือกวันที่จ่ายดอก"
