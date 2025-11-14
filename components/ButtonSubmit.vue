@@ -284,7 +284,7 @@ const IS_VALID_INVESTMENT_RATIO = () => {
 
 const IS_INT_FREQ_EQUAL_LENGTH_INT_OUT_DATE = () => {
     const month_or_year = parseInt(interest_freq.value.split(" ")[0])
-    const int_out_length  = parseInt(interest_out_date.value[0].length)
+    const int_out_length  = parseInt(interest_out_date_json_arr().length)
 
     if ( month_or_year == 1) {
         return ( int_out_length == 1 )

@@ -25,7 +25,7 @@
                 class="bg-cyan-lighten-5 rounded-sm"
                 cols="4">
                     <div class="bg-cyan-lighten-4 rounded-sm pa-3">
-                        <div class="font-weight-bold text-h6">วัน และ เดือน ที่เลือก</div>
+                        <div class="font-weight-bold text-h6">เดือน ที่เลือก</div>
                     </div>
                     <div
                         v-for="(payment_month,index) in array_payment_date"
@@ -39,15 +39,17 @@
                             <div>{{ payment_month }}</div>
                         </v-chip>
                     </div>
-                    {{ array_payment_date }}
+                    <!-- {{ array_payment_date }} -->
                 </v-col>
             </v-row>
         </div>
 </template>
 
 <script setup>
-import { ref , shallowRef } from "vue"
+import { ref , shallowRef , onMounted } from "vue"
+import { useStore } from "vuex"
 
+const store = useStore()
 const month_model = ref(null)
 const day_model = ref(null)
 const array_payment_date = ref([])
@@ -113,6 +115,14 @@ const day_choices = ['1','2','3','4','5','6','7','8','9','10',
 
 const day_item_choice = ref(day_choices)
 
+// watchEffect(() => {
+//    store.dispatch("push_interest_out_date_array",[month_model.value])
+// })
+
+onMounted(() => {
+    store.dispatch("reset_interest_out_date_array")
+})
+
 
 function add_payment_month () {
 
@@ -125,16 +135,19 @@ function add_payment_month () {
         if (found_payment_month) {
             window.alert("ซ้ำเดือน ห้ามต่อเติม")
         } else {
+            store.dispatch("push_interest_out_date_array",[chosen_month])
             array_payment_date.value.push( chosen_month )
         }
         
     } else {
+        store.dispatch("push_interest_out_date_array",[chosen_month])
         array_payment_date.value.push( chosen_month )
     }
 
 }
 
 function remove_payment_month(index) {
+    store.dispatch("remove_interest_out_date_array",index)
     array_payment_date.value.splice(index,1)
 }
 

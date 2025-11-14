@@ -3,10 +3,9 @@
         <div class="bg-white rounded-lg pa-1 mt-1">
             <div class="">
                 <h2>เลือกวันที่มีการชำระดอก</h2>
-                <div class="bg-indigo-accent-4">
+                <div class="bg-grey-lighten-4 rounded-lg ma-2">
                     <div>
                         <v-container fluid>
-                            <p>Selected Button: {{ payment_choice_radio }}</p>
                             <v-radio-group v-model="payment_choice_radio">
                                 <v-radio label="จ่ายตามวันที่ปกติ" value="normal"></v-radio>
                                 <v-radio label="จ่ายเฉพาะวันสุดท้ายของเดือน" value="abnormal"></v-radio>
@@ -16,12 +15,12 @@
                 </div>
                 <div class="bg-blue">
                     <div v-if="payment_choice_radio == 'normal'">
-                        <v-card>
+                        <v-card :elevation="4">
                             <Normal_Payment/>
                         </v-card>
                     </div>
                     <div v-if="payment_choice_radio == 'abnormal'">
-                        <v-card>
+                        <v-card :elevation="4">
                             <Abnormal_Payment/>
                         </v-card>
                     </div>
@@ -39,9 +38,6 @@ import Normal_Payment from "../components/MainForm2/Normal_Payment.vue"
 import Abnormal_Payment from "../components/MainForm2/Abnormal_Payment.vue"
 
 const payment_choice_radio = ref("normal")
-
-
-
 
 const chosen_day = ref(null)
 const day_item = ['1','2','3','4','5','6','7','8','9','10',
@@ -61,9 +57,9 @@ const on_clear_date = () => {
     store.dispatch("set_interest_out_date_array",[])
 }
 
-watchEffect(() => {
-   store.dispatch("set_interest_out_date_array",[chosen_months.value,chosen_day.value])
-})
+// watchEffect(() => {
+//    store.dispatch("set_interest_out_date_array",[chosen_months.value,chosen_day.value])
+// })
 // const format = (date) => {
 //     if (!date || date.length == 0) {
 //         return "";

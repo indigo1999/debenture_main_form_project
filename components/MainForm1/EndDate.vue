@@ -119,22 +119,23 @@ watchEffect(() => {
         if (start_day && end_day) {
             // year_end >= year_start
             if (end_year - start_year >= 0) {
+                return;
                 //VALID YEAR-DURATION
                 // month_end >= month_start
-                if(end_month - start_month >= 0) {
-                    //VALID MONTH-DURATION
-                    // day_end >= day_start
-                    if(end_day - start_day > 0) {
-                        //VALID DAY-DURATION
-                        return;
-                    } else {
-                        //INVALID DAY-DURATION
-                        INVALID_START_END_DATE_OVERLAY_STATUS.value = true
-                    }
-                } else {
-                    //INVALID MONTH-DURATION
-                    INVALID_START_END_DATE_OVERLAY_STATUS.value = true
-                }
+                // if(end_month - start_month >= 0) {
+                //     //VALID MONTH-DURATION
+                //     // day_end >= day_start
+                //     if(end_day - start_day > 0) {
+                //         //VALID DAY-DURATION
+                //         return;
+                //     } else {
+                //         //INVALID DAY-DURATION
+                //         INVALID_START_END_DATE_OVERLAY_STATUS.value = true
+                //     }
+                // } else {
+                //     //INVALID MONTH-DURATION
+                //     INVALID_START_END_DATE_OVERLAY_STATUS.value = true
+                // }
             } else {
                 //INVALID YEAR-DURATION
                 INVALID_START_END_DATE_OVERLAY_STATUS.value = true
@@ -156,20 +157,10 @@ const format = (date) => {
   const year_now = new Date().getFullYear()
 
   if ( date.getFullYear() - year_now >= 0) {
-        if ( month - month_now >= 0) {
-                if (day - day_now >= 0) {
-                    console.log("VALID DATE")
-                    const end_date_str = `${day}/${month}/${year_porsor}`
-                    store.dispatch("set_end_date",end_date_str)
-                    return end_date_str;
-                } else {
-                    INVALID_DATE_OVERLAY_STATUS.value = true
-                    // console.log("day must not be in the past from the current" + (day - day_now))
-                }
-        } else {
-            INVALID_DATE_OVERLAY_STATUS.value = true
-            // console.log("Month must not be in the past from the current" + ( month - month_now ))
-        }
+        console.log("VALID DATE")
+        const end_date_str = `${day}/${month}/${year_porsor}`
+        store.dispatch("set_end_date",end_date_str)
+        return end_date_str; 
   } else {
     INVALID_DATE_OVERLAY_STATUS.value = true
     // console.log("Year must not be in the past from the current" + year_now)

@@ -98,8 +98,16 @@ const store = createStore({
             state.debenture_paper_image.back_base64 = image_back_base64
             console.log("image back base64 : " + state.debenture_paper_image.back_base64)
         },
-        set_interest_out_date(state, interest_out_date_array){
-            state.interest_out_date = interest_out_date_array
+        reset_interest_out_date(state){
+            state.interest_out_date.splice(0)
+            console.log(state.interest_out_date)
+        },
+        push_interest_out_date(state, interest_out_date){
+            state.interest_out_date.push(interest_out_date)
+            console.log(state.interest_out_date)
+        },
+        remove_interest_out_date(state,interest_out_date_index){
+            state.interest_out_date.splice(interest_out_date_index,1)
             console.log(state.interest_out_date)
         }
 
@@ -156,8 +164,14 @@ const store = createStore({
         set_debenture_paper_image_back({ commit }, back_base64) {
             commit("set_debenture_paper_image_back",back_base64)
         },
-        set_interest_out_date_array({ commit } , interest_out_date_array){
-            commit("set_interest_out_date",interest_out_date_array)
+        reset_interest_out_date_array({ commit }) {
+            commit("reset_interest_out_date")
+        },
+        push_interest_out_date_array({ commit } , interest_out_date_array){
+            commit("push_interest_out_date",interest_out_date_array)
+        },
+        remove_interest_out_date_array({ commit }, interest_out_date_array_index){
+            commit("remove_interest_out_date",interest_out_date_array_index)
         },
         send_data : async ({ commit },data) => {
              try {

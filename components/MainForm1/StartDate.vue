@@ -81,20 +81,11 @@ const format = (date) => {
   const year_now = new Date().getFullYear()
 
   if ( date.getFullYear() - year_now >= 0) {
-        if ( month - month_now >= 0) {
-                if (day - day_now >= 0) {
-                    console.log("VALID DATE")
-                    const start_date_str = `${day}/${month}/${year_porsor}`
-                    store.dispatch("set_start_date",start_date_str)
-                    return start_date_str;
-                } else {
-                    INVALID_DATE_OVERLAY_STATUS.value = true
-                    // console.log("day must not be in the past from the current" + (day - day_now))
-                }
-        } else {
-            INVALID_DATE_OVERLAY_STATUS.value = true
-            // console.log("Month must not be in the past from the current" + ( month - month_now ))
-        }
+        console.log("VALID DATE")
+        const start_date_str = `${day}/${month}/${year_porsor}`
+        store.dispatch("set_start_date",start_date_str)
+        return start_date_str;
+                
   } else {
     INVALID_DATE_OVERLAY_STATUS.value = true
     // console.log("Year must not be in the past from the current" + year_now)

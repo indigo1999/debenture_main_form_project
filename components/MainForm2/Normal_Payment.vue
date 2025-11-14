@@ -50,15 +50,17 @@
                             <div>{{ payment_date_item[0] +" "+ payment_date_item[1] }}</div>
                         </v-chip>
                     </div>
-                    {{ array_payment_date }}
+                    <!-- {{ array_payment_date }} -->
                 </v-col>
             </v-row>
         </div>
 </template>
 
 <script setup>
-import { ref , shallowRef } from "vue"
+import { ref , shallowRef , onMounted} from "vue"
+import { useStore } from "vuex"
 
+const store = useStore()
 const month_model = ref(null)
 const day_model = ref(null)
 const array_payment_date = ref([])
@@ -124,6 +126,13 @@ const day_choices = ['1','2','3','4','5','6','7','8','9','10',
 
 const day_item_choice = ref(day_choices)
 
+// watchEffect(() => {
+//    store.dispatch("push_interest_out_date_array",[month_model.value,day_model.value])
+// })
+
+onMounted(() => {
+    store.dispatch("reset_interest_out_date_array")
+})
 
 function add_payment_date () {
 
@@ -137,16 +146,19 @@ function add_payment_date () {
         if (found_payment_month) {
             window.alert("ซ้ำเดือน ห้ามต่อเติม")
         } else {
+            store.dispatch("push_interest_out_date_array",[chosen_month,chosen_day])
             array_payment_date.value.push( [ chosen_month , chosen_day ] )
         }
         
     } else {
+        store.dispatch("push_interest_out_date_array",[chosen_month,chosen_day])
         array_payment_date.value.push( [ chosen_month , chosen_day ] )
     }
 
 }
 
 function remove_payment_date(index) {
+    store.dispatch("remove_interest_out_date_array",index)
     array_payment_date.value.splice(index,1)
 }
 
